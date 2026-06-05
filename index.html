@@ -90,24 +90,15 @@
         </header>
 
         <section id="home" class="relative px-5 pb-8 pt-7">
-            <div class="absolute -right-20 top-2 h-56 w-56 rounded-full bg-mint/45 blur-3xl"></div>
-            <div class="relative z-10 grid grid-cols-[1.05fr_.95fr] items-center gap-2">
-                <div class="animate-fadeUp">
-                    <p class="mb-1 text-sm font-semibold uppercase tracking-[0.18em] text-leaf">Smart soil scanner</p>
-                    <!-- <div><img src="src/images/SoilNurse_Blue.png" alt="" class="h-auto w-56 object-contain"></div> -->
-                    <h1 class="font-display text-5xl font-black italic leading-[.92] text-clay">Soil Nurse</h1>
-                    <p class="mt-4 max-w-[15rem] text-sm leading-6 text-soil/80">
-                        Scan warna indikator NPK dan pH tanah, lalu dapatkan rekomendasi tanaman yang paling cocok.
-                    </p>
-                    <a href="#scanner" class="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold text-white shadow-panel transition hover:-translate-y-0.5 hover:bg-soil">
-                        <i data-lucide="scan-line" class="size-5"></i>
-                        Mulai Scan
-                    </a>
-                </div>
-                <div class="relative h-64">
-                    <div class="absolute bottom-0 right-[-5.4rem] h-72 w-80 animate-float bg-[url('src/images/Maskot.png')] bg-contain bg-bottom bg-no-repeat"></div>
-                </div>
+            <!-- <div class="absolute -right-20 top-2 h-56 w-56 rounded-full bg-mint/45 blur-3xl"></div> -->
+            <div class="static z-10">
+                <div><img src="src/images/SoilNurse_Blue.png" alt="" class="h-auto w-56 object-contain"></div>
+                <div class="absolute -bottom-12 -right-[20px] h-96 w-96 animate-float bg-[url('src/images/Maskot.png')] bg-contain bg-no-repeat"></div>
             </div>
+            <a href="#scanner" class="mt-5 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-bold text-white shadow-panel transition hover:-translate-y-0.5 hover:bg-soil">
+                <i data-lucide="scan-line" class="size-5"></i>
+                Mulai Scan
+            </a>
         </section>
 
         <section id="scanner" class="px-5 pb-6">
@@ -261,8 +252,8 @@
         </section>
 
         <nav class="fixed bottom-0 left-1/2 z-50 flex h-16 w-full max-w-[540px] -translate-x-1/2 items-center justify-around bg-ocean text-white">
-            <a href="#home" class="flex h-full flex-1 items-center justify-center" aria-label="Beranda">
-                <i data-lucide="sprout" class="size-8 stroke-[1.8]"></i>
+            <a href="src/about.html" class="flex h-full flex-1 items-center justify-center" aria-label="Beranda">
+                <i data-lucide="clipboard-list" class="size-8 stroke-[1.8]"></i>
             </a>
             <a href="#scanner" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
                 <i data-lucide="search" class="size-9 stroke-[1.8]"></i>
@@ -274,7 +265,7 @@
                 <span class="absolute bottom-0.5 text-xl font-bold italic leading-none">Scan</span>
             </a>
             <a href="#result" class="flex h-full flex-1 items-center justify-center" aria-label="Data">
-                <i data-lucide="clipboard-list" class="size-9 stroke-[1.8]"></i>
+                <i data-lucide="sprout" class="size-8 stroke-[1.8]"></i>
             </a>
             <a href="#home" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
                 <i data-lucide="user-round" class="size-9 stroke-[1.8]"></i>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Soil Nurse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Trebuchet MS"', '"Segoe UI"', 'ui-sans-serif', 'system-ui'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        cream: '#f8eadf',
+                        peach: '#f8d8c3',
+                        clay: '#c96f4c',
+                        coral: '#ef8b76',
+                        mint: '#a8d8d6',
+                        leaf: '#6f9462',
+                        ocean: '#9ed2e7',
+                        ink: '#24415f',
+                        soil: '#74513f'
+                    },
+                    boxShadow: {
+                        soft: '0 20px 45px rgba(92, 64, 45, 0.14)',
+                        panel: '0 10px 24px rgba(198, 111, 76, 0.13)'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseScan: {
+                            '0%': { transform: 'translateX(-110%)', opacity: '0' },
+                            '18%, 72%': { opacity: '1' },
+                            '100%': { transform: 'translateX(110%)', opacity: '0' }
+                        },
+                        grow: {
+                            '0%': { transform: 'scaleY(.2)', opacity: '.55' },
+                            '100%': { transform: 'scaleY(1)', opacity: '1' }
+                        },
+                        fadeUp: {
+                            '0%': { transform: 'translateY(14px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    },
+                    animation: {
+                        float: 'float 4s ease-in-out infinite',
+                        scan: 'pulseScan 1.9s ease-in-out infinite',
+                        grow: 'grow .7s ease-out both',
+                        fadeUp: 'fadeUp .55s ease-out both'
+                    }
+                }
+            }
+        };
+    </script>
+
+</head>
+<body class="min-h-screen bg-[#e8f1ec] text-ink antialiased">
+    <main class="relative mx-auto min-h-screen w-full max-w-[540px] overflow-hidden bg-cream shadow-soft">
+        <header class="sticky top-0 z-40 flex h-[6.25rem] items-center justify-between border-b border-white/35 bg-peach px-5">
+            <a href="#home" class="flex items-center gap-3" aria-label="Soil Nurse beranda">
+                <img src="images/Logo.png" alt="Logo Soil Nurse" class="h-16 w-auto object-contain">
+                <img src="images/LogoText.png" alt="Soil Nurse" class="h-10 w-auto object-contain">
+            </a>
+            <div class="flex items-center gap-5">                
+                <button class="rounded-full p-2 text-soil transition hover:bg-white/35" aria-label="Buka menu">
+                    <i data-lucide="menu" class="size-8 stroke-[2.2]"></i>
+                </button>
+            </div>
+        </header>
+
+        <section id="product" class="static">
+            <h1 class="font-display text-5xl font-black italic leading-none text-clay text-center my-5">Our Product</h1>
+            <div class="absolute -left-1 h-auto w-72"><img src="images/product.png" alt=""></div>
+            <div class="absolute right-5">
+                <h1 class="w-60 text-left text-3xl font-mono font-semibold">Penjelasan Product</h1>
+                <p class=" w-60 text-left font-mono font-semibold">--- ---- ---</p>
+            </div>            
+        </section>
+
+        <nav class="fixed bottom-0 left-1/2 z-50 flex h-16 w-full max-w-[540px] -translate-x-1/2 items-center justify-around bg-ocean text-white">
+            <a href="#home" class="flex h-full flex-1 items-center justify-center" aria-label="Beranda">
+                <i data-lucide="clipboard-list" class="size-8 stroke-[1.8]"></i>
+            </a>
+            <a href="#scanner" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
+                <i data-lucide="search" class="size-9 stroke-[1.8]"></i>
+            </a>
+            <a href="#scanner" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
+                <div class="absolute -top-5 flex size-[4.5rem] items-center justify-center rounded-full bg-ocean">
+                    <i data-lucide="scan-line" class="size-11 stroke-[1.7]"></i>
+                </div>
+                <span class="absolute bottom-0.5 text-xl font-bold italic leading-none">Scan</span>
+            </a>
+            <a href="#result" class="flex h-full flex-1 items-center justify-center" aria-label="Data">
+                <i data-lucide="sprout" class="size-8 stroke-[1.8]"></i>
+            </a>
+            <a href="#home" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
+                <i data-lucide="user-round" class="size-9 stroke-[1.8]"></i>
+            </a>
+        </nav>
+    </main>
+</body>
+</html>
