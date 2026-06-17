@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Soil Nurse</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -73,10 +73,134 @@
         #cameraFeed {
             transform: scaleX(-1);
         }
+
+        /* Modal popup */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 60;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-box {
+            max-width: 400px;
+            width: 90%;
+            background: white;
+            border-radius: 2rem;
+            padding: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+        .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            line-height: 1;
+            color: #74513f;
+            cursor: pointer;
+        }
+        .plant-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .plant-table th {
+            text-align: left;
+            padding: 8px 4px;
+            font-weight: 700;
+            color: #74513f;
+            border-bottom: 2px solid #c96f4c55;
+        }
+        .plant-table td {
+            padding: 12px 4px;
+            border-bottom: 1px solid #c96f4c22;
+            cursor: pointer;
+        }
+        .plant-table tr:hover td {
+            background: #f8eadf55;
+        }
+        .match-bar {
+            height: 6px;
+            background: #e0d6cd;
+            border-radius: 99px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 120px;
+        }
+        .match-bar-fill {
+            height: 100%;
+            background: #6f9462;
+            border-radius: 99px;
+            transition: width 0.4s ease;
+        }
+        .badge-match {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 99px;
+            background: #6f946233;
+            color: #6f9462;
+        }
+
+        /* Tombol nutrisi lingkaran */
+        .nutri-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.65rem;
+            color: white;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .nutri-btn:hover {
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .nutri-btn .icon {
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+        .nutri-btn .label {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            opacity: 0.9;
+        }
+        .nutri-btn.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.6);
+        }
+        .nutri-btn-n { background: #2d7d3a; }
+        .nutri-btn-p { background: #c96f4c; }
+        .nutri-btn-k { background: #d4a24c; }
+        .nutri-btn-ph { background: #4c8fc9; }
     </style>
 </head>
 <body class="min-h-screen bg-[#e8f1ec] text-ink antialiased">
     <main class="relative mx-auto min-h-screen w-full max-w-[540px] overflow-hidden bg-cream shadow-soft">
+        <!-- HEADER -->
         <header class="sticky top-0 z-40 flex h-[6.25rem] items-center justify-between border-b border-white/35 bg-peach px-5">
             <a href="#home" class="flex items-center gap-3" aria-label="Soil Nurse beranda">
                 <img src="src/images/Logo.png" alt="Logo Soil Nurse" class="h-16 w-auto object-contain">
@@ -89,8 +213,8 @@
             </div>
         </header>
 
+        <!-- HOME -->
         <section id="home" class="relative px-5 pb-8 pt-7">
-            <!-- <div class="absolute -right-20 top-2 h-56 w-56 rounded-full bg-mint/45 blur-3xl"></div> -->
             <div class="static z-10">
                 <div><img src="src/images/SoilNurse_Blue.png" alt="" class="h-auto w-56 object-contain"></div>
                 <div class="absolute -bottom-12 -right-[20px] h-96 w-96 animate-float bg-[url('src/images/Maskot.png')] bg-contain bg-no-repeat"></div>
@@ -101,21 +225,40 @@
             </a>
         </section>
 
+        <!-- SCANNER -->
         <section id="scanner" class="px-5 pb-6">
             <div class="rounded-[2rem] border border-coral/35 bg-white/38 p-4 shadow-panel">
                 <div class="mb-4 flex items-center justify-between gap-3">
                     <div>
                         <p class="font-display text-3xl font-black italic leading-none text-clay">Scanner</p>
-                        <p class="mt-1 text-sm text-soil/70">Scan warna indikator lewat kamera, contoh warna, atau gambar.</p>
+                        <p class="mt-1 text-sm text-soil/70">Scan 4 warna indikator secara bertahap: N, P, K, lalu pH.</p>
                     </div>
-                    <div id="scanStatus" class="rounded-full bg-leaf/10 px-3 py-1 text-xs font-bold text-leaf">Ready</div>
+                    <div id="scanStatus" class="rounded-full bg-leaf/10 px-3 py-1 text-xs font-bold text-leaf">Tahap N</div>
                 </div>
 
                 <div class="relative overflow-hidden rounded-2xl border-2 border-dashed border-coral/45 bg-cream p-4 scan-grid">
                     <div id="scannerBeam" class="pointer-events-none absolute inset-y-0 left-0 hidden w-24 bg-gradient-to-r from-transparent via-white/75 to-transparent"></div>
+                    <div id="scanSteps" class="mb-4 grid grid-cols-4 gap-2">
+                        <div data-step="n" class="scan-step rounded-2xl border border-coral/35 bg-white/75 px-3 py-2 text-center text-xs font-black text-soil">
+                            <span class="block text-lg leading-none">N</span>
+                            <span class="mt-1 block text-[10px] uppercase tracking-[0.12em]">Nitrogen</span>
+                        </div>
+                        <div data-step="p" class="scan-step rounded-2xl border border-coral/35 bg-white/75 px-3 py-2 text-center text-xs font-black text-soil">
+                            <span class="block text-lg leading-none">P</span>
+                            <span class="mt-1 block text-[10px] uppercase tracking-[0.12em]">Fosfor</span>
+                        </div>
+                        <div data-step="k" class="scan-step rounded-2xl border border-coral/35 bg-white/75 px-3 py-2 text-center text-xs font-black text-soil">
+                            <span class="block text-lg leading-none">K</span>
+                            <span class="mt-1 block text-[10px] uppercase tracking-[0.12em]">Kalium</span>
+                        </div>
+                        <div data-step="ph" class="scan-step rounded-2xl border border-coral/35 bg-white/75 px-3 py-2 text-center text-xs font-black text-soil">
+                            <span class="block text-lg leading-none">pH</span>
+                            <span class="mt-1 block text-[10px] uppercase tracking-[0.12em]">Keasaman</span>
+                        </div>
+                    </div>
                     <div class="mb-4 rounded-2xl border border-coral/35 bg-white/70 p-3">
                         <div class="relative overflow-hidden rounded-xl bg-soil/90">
-                            <video id="cameraFeed" class="aspect-video w-full object-cover opacity-90" playsinline autoplay muted></video>
+                            <video id="cameraFeed" class="aspect-video w-full object-cover opacity-90" playsinline webkit-playsinline autoplay muted></video>
                             <div class="pointer-events-none absolute left-1/2 top-1/2 size-20 -translate-x-1/2 -translate-y-1/2 rounded-2xl border-2 border-white shadow-[0_0_0_999px_rgba(0,0,0,.22)]"></div>
                             <div class="pointer-events-none absolute inset-x-8 top-1/2 h-0.5 bg-white/80"></div>
                         </div>
@@ -128,7 +271,7 @@
                                 </div>
                             </div>
                             <button id="scanCameraBtn" class="rounded-full bg-clay px-4 py-2 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-soil">
-                                Scan
+                                Scan N
                             </button>
                         </div>
                         <div class="mt-3 grid grid-cols-2 gap-2">
@@ -141,7 +284,7 @@
                                 Stop
                             </button>
                         </div>
-                        <p id="cameraHint" class="mt-3 text-xs leading-5 text-soil/70">Arahkan kotak tengah ke warna indikator NPK/pH, lalu tekan Scan.</p>
+                        <p id="cameraHint" class="mt-3 text-xs leading-5 text-soil/70">Tahap 1/4: arahkan kotak tengah ke warna indikator Nitrogen (N), lalu tekan Scan N.</p>
                     </div>
 
                     <div class="grid grid-cols-4 gap-3">
@@ -165,14 +308,15 @@
 
                     <label class="mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-2xl bg-ocean/55 px-4 py-3 text-sm font-bold text-ink transition hover:bg-ocean">
                         <i data-lucide="image-up" class="size-5"></i>
-                        Unggah gambar warna
-                        <input id="imageInput" type="file" accept="image/*" class="sr-only">
+                        Ambil/unggah foto warna
+                        <input id="imageInput" type="file" accept="image/*" capture="environment" class="sr-only">
                     </label>
                     <canvas id="colorCanvas" class="hidden"></canvas>
                 </div>
             </div>
         </section>
 
+        <!-- RESULT -->
         <section id="result" class="px-5 pb-6">
             <div class="mb-3 flex items-end justify-between">
                 <h2 class="font-display text-3xl font-black italic text-clay">Scanner Result</h2>
@@ -193,17 +337,6 @@
 
                 <article class="result-card rounded-2xl border border-coral/45 bg-white/42 p-4 [animation-delay:.06s]">
                     <div class="flex items-center justify-between">
-                        <span class="font-display text-5xl font-black italic leading-none text-coral">K</span>
-                        <span id="kStatus" class="rounded-full bg-ocean/35 px-3 py-1 text-xs font-bold text-ink">-</span>
-                    </div>
-                    <div class="mt-4 h-2 rounded-full bg-coral/15">
-                        <div id="kBar" class="h-full origin-left rounded-full bg-coral animate-grow" style="width: 8%"></div>
-                    </div>
-                    <p id="kValue" class="mt-2 text-xs font-semibold text-soil/75">Kalium belum discan</p>
-                </article>
-
-                <article class="result-card rounded-2xl border border-coral/45 bg-white/42 p-4 [animation-delay:.12s]">
-                    <div class="flex items-center justify-between">
                         <span class="font-display text-5xl font-black italic leading-none text-coral">P</span>
                         <span id="pStatus" class="rounded-full bg-ocean/35 px-3 py-1 text-xs font-bold text-ink">-</span>
                     </div>
@@ -211,6 +344,17 @@
                         <div id="pBar" class="h-full origin-left rounded-full bg-coral animate-grow" style="width: 8%"></div>
                     </div>
                     <p id="pValue" class="mt-2 text-xs font-semibold text-soil/75">Fosfor belum discan</p>
+                </article>
+
+                <article class="result-card rounded-2xl border border-coral/45 bg-white/42 p-4 [animation-delay:.12s]">
+                    <div class="flex items-center justify-between">
+                        <span class="font-display text-5xl font-black italic leading-none text-coral">K</span>
+                        <span id="kStatus" class="rounded-full bg-ocean/35 px-3 py-1 text-xs font-bold text-ink">-</span>
+                    </div>
+                    <div class="mt-4 h-2 rounded-full bg-coral/15">
+                        <div id="kBar" class="h-full origin-left rounded-full bg-coral animate-grow" style="width: 8%"></div>
+                    </div>
+                    <p id="kValue" class="mt-2 text-xs font-semibold text-soil/75">Kalium belum discan</p>
                 </article>
 
                 <article class="result-card rounded-2xl border border-coral/45 bg-white/42 p-4 [animation-delay:.18s]">
@@ -226,45 +370,68 @@
             </div>
         </section>
 
-        <section class="px-5 pb-28">
-            <h2 class="mb-3 font-display text-3xl font-black italic text-clay">Plant Recommendation</h2>
+        <!-- PLANT RECOMMENDATION (TABEL) -->
+        <section class="px-5 pb-6">
+            <h2 class="mb-3 font-display text-3xl font-black italic text-clay">🌱 Rekomendasi Tanaman</h2>
             <div class="rounded-[2rem] border border-coral/45 bg-white/42 p-4 shadow-panel">
-                <div class="flex items-center gap-4">
-                    <div id="plantBadge" class="flex size-28 shrink-0 items-center justify-center rounded-full border-[6px] border-white bg-[#f9f5ec] shadow-inner">
-                        <svg id="plantIcon" viewBox="0 0 100 100" class="size-20" aria-hidden="true">
-                            <path d="M51 10c10 10 10 23 1 33-7 8-22 10-34 8 10-4 16-13 19-25 2-8 6-14 14-16Z" fill="#dd1f2f"/>
-                            <path d="M55 8c5 2 8 8 6 15" fill="none" stroke="#2ea23c" stroke-width="7" stroke-linecap="round"/>
-                            <circle cx="72" cy="33" r="4" fill="#fff"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <p id="plantName" class="font-display text-4xl font-black italic leading-none text-clay">Chilli</p>
-                        <p id="plantReason" class="mt-2 text-sm leading-6 text-soil/78">Cocok untuk tanah hangat dengan pH sedikit asam sampai netral.</p>
-                    </div>
-                </div>
-                <div class="mt-5 rounded-2xl bg-peach/55 p-4">
-                    <p id="plantGuide" class="font-display text-3xl font-black italic leading-none text-clay">How to plant chilli?</p>
-                    <p id="plantTips" class="mt-3 text-sm leading-6 text-soil/80">
-                        Gunakan bedengan gembur, beri kompos matang, jaga kelembapan, dan pastikan sinar matahari cukup.
-                    </p>
+                <div id="plantTableContainer">
+                    <p class="text-sm text-soil/70">Lakukan scan 4 warna untuk melihat rekomendasi tanaman.</p>
+                    <table class="plant-table mt-3 hidden" id="plantTable">
+                        <thead>
+                            <tr>
+                                <th>Tanaman</th>
+                                <th class="text-right">Skor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="plantTableBody">
+                            <!-- akan diisi JS -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
 
+        <!-- KEBUTUHAN NUTRISI (LINGKARAN) -->
+        <section class="px-5 mb-6">
+            <h2 class="mb-3 font-display text-3xl font-black italic text-clay">🧪 Kebutuhan Nutrisi</h2>
+            <div class="rounded-[2rem] border border-coral/45 bg-white/42 p-4 shadow-panel">
+                <p id="nutriPlaceholder" class="text-sm text-soil/70 mb-3">Pilih tanaman dari tabel di atas untuk melihat kebutuhan nutrisinya.</p>
+                <div id="nutriButtons" class="flex justify-around items-center gap-2">
+                    <button class="nutri-btn nutri-btn-n disabled" data-nutri="n">
+                        <span class="icon">🌿</span>
+                        <span class="label">N</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-p disabled" data-nutri="p">
+                        <span class="icon">🪨</span>
+                        <span class="label">P</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-k disabled" data-nutri="k">
+                        <span class="icon">🍌</span>
+                        <span class="label">K</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-ph disabled" data-nutri="ph">
+                        <span class="icon">🧪</span>
+                        <span class="label">pH</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAV BOTTOM -->
         <nav class="fixed bottom-0 left-1/2 z-50 flex h-16 w-full max-w-[540px] -translate-x-1/2 items-center justify-around bg-ocean text-white">
             <a href="src/about.html" class="flex h-full flex-1 items-center justify-center" aria-label="Beranda">
                 <i data-lucide="clipboard-list" class="size-8 stroke-[1.8]"></i>
             </a>
-            <a href="#scanner" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
+            <a href="search_plant.html" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
                 <i data-lucide="search" class="size-9 stroke-[1.8]"></i>
             </a>
-            <a href="#scanner" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
+            <a href="index.html" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
                 <div class="absolute -top-5 flex size-[4.5rem] items-center justify-center rounded-full bg-ocean">
                     <i data-lucide="scan-line" class="size-11 stroke-[1.7]"></i>
                 </div>
                 <span class="absolute bottom-0.5 text-xl font-bold italic leading-none">Scan</span>
             </a>
-            <a href="#result" class="flex h-full flex-1 items-center justify-center" aria-label="Data">
+            <a href="src/plants_database.html" class="flex h-full flex-1 items-center justify-center" aria-label="Data">
                 <i data-lucide="sprout" class="size-8 stroke-[1.8]"></i>
             </a>
             <a href="#home" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
@@ -273,7 +440,50 @@
         </nav>
     </main>
 
+    <!-- MODAL POPUP (untuk detail tanaman) -->
+    <div class="modal-overlay" id="plantModal">
+        <div class="modal-box">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h3 id="modalTitle" class="font-display text-3xl font-black italic text-clay mb-2">Chilli</h3>
+            <div class="grid grid-cols-2 gap-2 text-sm mb-3">
+                <div><span class="font-bold">N:</span> <span id="modalN">-</span></div>
+                <div><span class="font-bold">P:</span> <span id="modalP">-</span></div>
+                <div><span class="font-bold">K:</span> <span id="modalK">-</span></div>
+                <div><span class="font-bold">pH:</span> <span id="modalPH">-</span></div>
+            </div>
+            <p id="modalReason" class="text-sm text-soil/80 leading-relaxed">Alasan kecocokan akan muncul di sini.</p>
+            <div class="mt-4 rounded-xl bg-peach/55 p-3">
+                <p class="font-display text-xl font-black italic text-clay" id="modalGuide">How to plant?</p>
+                <p id="modalTips" class="mt-1 text-sm text-soil/80">Tips menanam...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL NUTRISI (popup info N, P, K, pH) -->
+    <div class="modal-overlay" id="nutriModal">
+        <div class="modal-box">
+            <button class="modal-close" id="nutriModalClose">&times;</button>
+            <h3 id="nutriModalTitle" class="font-display text-3xl font-black italic text-clay mb-2">Nitrogen (N)</h3>
+            <div class="mb-3 text-sm">
+                <p><span class="font-bold">Kebutuhan ideal:</span> <span id="nutriIdeal">-</span></p>
+                <p><span class="font-bold">Kondisi tanah saat ini:</span> <span id="nutriCurrent">-</span></p>
+                <p><span class="font-bold">Status:</span> <span id="nutriStatus">-</span></p>
+            </div>
+            <p id="nutriDescription" class="text-sm text-soil/80 leading-relaxed">Deskripsi tentang unsur ini dan pengaruhnya pada tanaman.</p>
+            <div class="mt-4 rounded-xl bg-peach/55 p-3">
+                <p class="font-display text-lg font-black italic text-clay">💡 Tips</p>
+                <p id="nutriTips" class="mt-1 text-sm text-soil/80">Tips terkait unsur ini.</p>
+            </div>
+            <div class="mt-3 text-center">
+                <a id="nutriLink" href="#" target="_blank" class="inline-block text-sm text-ink font-bold underline underline-offset-2 hover:text-clay">
+                    📄 Info lebih lanjut
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ===================== DATA TANAMAN (diperluas dengan info nutrisi) =====================
         const samples = {
             volcanic: {
                 n: 72, p: 66, k: 81, ph: 6.4,
@@ -282,7 +492,14 @@
                 guide: 'How to plant chilli?',
                 tips: 'Tanam di area penuh matahari, beri kompos matang, siram teratur, dan tambahkan mulsa agar tanah stabil.',
                 color: '#dd1f2f',
-                icon: 'chilli'
+                icon: 'chilli',
+                // Info nutrisi spesifik untuk tanaman ini
+                nutri: {
+                    n: { ideal: '70-80%', desc: 'Nitrogen penting untuk pertumbuhan daun dan batang. Cabai membutuhkan nitrogen sedang-tinggi untuk produksi daun yang sehat.', tips: 'Tambahkan pupuk urea atau kompos kaya nitrogen secara bertahap.', link: 'https://example.com/nitrogen-chilli' },
+                    p: { ideal: '60-70%', desc: 'Fosfor mendukung perkembangan akar dan pembungaan. Cabai membutuhkan fosfor cukup untuk hasil buah maksimal.', tips: 'Gunakan pupuk SP-36 atau rock phosphate saat tanam.', link: 'https://example.com/fosfor-chilli' },
+                    k: { ideal: '75-85%', desc: 'Kalium meningkatkan ketahanan terhadap penyakit dan kualitas buah. Cabai sangat responsif terhadap kalium.', tips: 'Berikan pupuk KCL atau abu kayu secara teratur.', link: 'https://example.com/kalium-chilli' },
+                    ph: { ideal: '6.0 - 6.8', desc: 'pH tanah mempengaruhi ketersediaan unsur hara. Cabai tumbuh optimal pada pH agak asam hingga netral.', tips: 'Jika pH terlalu asam, tambahkan kapur dolomit. Jika terlalu basa, tambahkan belerang.', link: 'https://example.com/ph-chilli' }
+                }
             },
             neutral: {
                 n: 61, p: 58, k: 64, ph: 6.8,
@@ -291,7 +508,13 @@
                 guide: 'How to plant tomato?',
                 tips: 'Gunakan ajir sejak awal, beri jarak antar tanaman, dan jaga daun tetap kering untuk mengurangi penyakit.',
                 color: '#e04435',
-                icon: 'tomato'
+                icon: 'tomato',
+                nutri: {
+                    n: { ideal: '55-65%', desc: 'Tomat membutuhkan nitrogen seimbang untuk pertumbuhan vegetatif dan generatif. Terlalu banyak nitrogen dapat mengurangi buah.', tips: 'Gunakan pupuk NPK 16-16-16 pada awal tanam.', link: 'https://example.com/nitrogen-tomato' },
+                    p: { ideal: '50-60%', desc: 'Fosfor penting untuk pembentukan bunga dan buah tomat.', tips: 'Tambahkan tepung tulang atau pupuk fosfat saat persiapan lahan.', link: 'https://example.com/fosfor-tomato' },
+                    k: { ideal: '60-70%', desc: 'Kalium meningkatkan rasa, warna, dan daya simpan tomat.', tips: 'Berikan pupuk kalium saat fase pembungaan.', link: 'https://example.com/kalium-tomato' },
+                    ph: { ideal: '6.2 - 6.8', desc: 'Tomat tumbuh baik pada pH netral hingga sedikit asam.', tips: 'Lakukan tes pH secara berkala dan sesuaikan dengan kapur atau sulfur.', link: 'https://example.com/ph-tomato' }
+                }
             },
             sandy: {
                 n: 43, p: 47, k: 56, ph: 7.2,
@@ -300,7 +523,13 @@
                 guide: 'How to plant corn?',
                 tips: 'Tanam berkelompok agar penyerbukan baik, tambah pupuk nitrogen bertahap, dan siram saat fase pembungaan.',
                 color: '#f0b52d',
-                icon: 'corn'
+                icon: 'corn',
+                nutri: {
+                    n: { ideal: '40-50%', desc: 'Jagung membutuhkan nitrogen tinggi untuk pertumbuhan batang dan daun.', tips: 'Berikan pupuk nitrogen secara bertahap: 1/3 saat tanam, 1/3 saat tinggi 30cm, 1/3 saat pembungaan.', link: 'https://example.com/nitrogen-corn' },
+                    p: { ideal: '45-55%', desc: 'Fosfor penting untuk perkembangan akar jagung.', tips: 'Pastikan fosfor tersedia di awal tanam.', link: 'https://example.com/fosfor-corn' },
+                    k: { ideal: '50-60%', desc: 'Kalium membantu jagung tahan kekeringan dan meningkatkan kualitas tongkol.', tips: 'Aplikasikan pupuk kalium bersamaan dengan nitrogen.', link: 'https://example.com/kalium-corn' },
+                    ph: { ideal: '6.5 - 7.5', desc: 'Jagung toleran terhadap pH yang lebih luas, tetapi netral adalah yang terbaik.', tips: 'Pantau pH tanah dan lakukan koreksi jika diperlukan.', link: 'https://example.com/ph-corn' }
+                }
             },
             acidic: {
                 n: 38, p: 52, k: 44, ph: 5.6,
@@ -309,10 +538,20 @@
                 guide: 'How to plant pineapple?',
                 tips: 'Pilih media porous, hindari genangan, beri kompos ringan, dan tempatkan pada lokasi bercahaya kuat.',
                 color: '#7fa440',
-                icon: 'pineapple'
+                icon: 'pineapple',
+                nutri: {
+                    n: { ideal: '35-45%', desc: 'Nanas tidak membutuhkan nitrogen tinggi. Terlalu banyak nitrogen dapat mengurangi rasa manis.', tips: 'Gunakan pupuk organik dengan kandungan nitrogen rendah.', link: 'https://example.com/nitrogen-pineapple' },
+                    p: { ideal: '50-60%', desc: 'Fosfor penting untuk pertumbuhan akar nanas.', tips: 'Berikan pupuk fosfat saat tanam.', link: 'https://example.com/fosfor-pineapple' },
+                    k: { ideal: '40-50%', desc: 'Kalium meningkatkan kualitas buah nanas.', tips: 'Pastikan kalium tersedia saat buah mulai terbentuk.', link: 'https://example.com/kalium-pineapple' },
+                    ph: { ideal: '4.5 - 5.5', desc: 'Nanas tumbuh optimal pada tanah asam.', tips: 'Hindari pengapuran berlebihan pada lahan nanas.', link: 'https://example.com/ph-pineapple' }
+                }
             }
         };
 
+        // Daftar semua tanaman
+        const allPlants = Object.values(samples);
+
+        // ---------------------- ELEMEN DOM ----------------------
         const els = {
             status: document.getElementById('scanStatus'),
             beam: document.getElementById('scannerBeam'),
@@ -326,14 +565,49 @@
             colorPreview: document.getElementById('colorPreview'),
             rgbValue: document.getElementById('rgbValue'),
             reset: document.getElementById('resetBtn'),
-            plantName: document.getElementById('plantName'),
-            plantReason: document.getElementById('plantReason'),
-            plantGuide: document.getElementById('plantGuide'),
-            plantTips: document.getElementById('plantTips'),
-            plantIcon: document.getElementById('plantIcon')
+            scanSteps: document.querySelectorAll('.scan-step'),
+            plantTable: document.getElementById('plantTable'),
+            plantTableBody: document.getElementById('plantTableBody'),
+            plantTableContainer: document.getElementById('plantTableContainer'),
+            // modal tanaman
+            modal: document.getElementById('plantModal'),
+            modalClose: document.getElementById('modalClose'),
+            modalTitle: document.getElementById('modalTitle'),
+            modalN: document.getElementById('modalN'),
+            modalP: document.getElementById('modalP'),
+            modalK: document.getElementById('modalK'),
+            modalPH: document.getElementById('modalPH'),
+            modalReason: document.getElementById('modalReason'),
+            modalGuide: document.getElementById('modalGuide'),
+            modalTips: document.getElementById('modalTips'),
+            // nutri buttons & modal
+            nutriPlaceholder: document.getElementById('nutriPlaceholder'),
+            nutriButtons: document.querySelectorAll('.nutri-btn'),
+            nutriModal: document.getElementById('nutriModal'),
+            nutriModalClose: document.getElementById('nutriModalClose'),
+            nutriModalTitle: document.getElementById('nutriModalTitle'),
+            nutriIdeal: document.getElementById('nutriIdeal'),
+            nutriCurrent: document.getElementById('nutriCurrent'),
+            nutriStatus: document.getElementById('nutriStatus'),
+            nutriDescription: document.getElementById('nutriDescription'),
+            nutriTips: document.getElementById('nutriTips'),
+            nutriLink: document.getElementById('nutriLink')
         };
-        let cameraStream = null;
 
+        let cameraStream = null;
+        let videoReady = false;
+        let selectedPlant = null; // menyimpan tanaman yang dipilih dari tabel
+
+        const scanStages = [
+            { key: 'n', short: 'N', label: 'Nitrogen', unit: '%' },
+            { key: 'p', short: 'P', label: 'Fosfor', unit: '%' },
+            { key: 'k', short: 'K', label: 'Kalium', unit: '%' },
+            { key: 'ph', short: 'pH', label: 'pH', unit: '' }
+        ];
+        let activeScanIndex = 0;
+        let stagedResult = { n: null, p: null, k: null, ph: null };
+
+        // ---------------------- FUNGSI UTILITY ----------------------
         function quality(value, type) {
             if (type === 'ph') {
                 if (value < 5.8) return 'Asam';
@@ -369,192 +643,383 @@
             return icons[type] || icons.chilli;
         }
 
-        function applyResult(data) {
-            setBar('n', data.n, `Nitrogen ${data.n}%`);
-            setBar('p', data.p, `Fosfor ${data.p}%`);
-            setBar('k', data.k, `Kalium ${data.k}%`);
-            setBar('ph', data.ph, `pH tanah ${data.ph.toFixed(1)}`);
-
-            els.plantName.textContent = data.plant;
-            els.plantReason.textContent = data.reason;
-            els.plantGuide.textContent = data.guide;
-            els.plantTips.textContent = data.tips;
-            els.plantIcon.innerHTML = iconSvg(data.icon, data.color);
+        // ---------------------- PERHITUNGAN SKOR ----------------------
+        function calculateMatch(scan, plant) {
+            const dN = (scan.n - plant.n) / 100;
+            const dP = (scan.p - plant.p) / 100;
+            const dK = (scan.k - plant.k) / 100;
+            const dPh = (scan.ph - plant.ph) / 14;
+            const dist = Math.sqrt(dN*dN + dP*dP + dK*dK + dPh*dPh);
+            const score = Math.max(0, 100 - (dist * 100));
+            return Math.min(100, Math.round(score));
         }
 
-        function clearResult() {
-            setBar('n', 8, 'Nitrogen belum discan');
-            setBar('p', 8, 'Fosfor belum discan');
-            setBar('k', 8, 'Kalium belum discan');
-            setBar('ph', 1.1, 'pH belum discan');
-            document.getElementById('nStatus').textContent = '-';
-            document.getElementById('pStatus').textContent = '-';
-            document.getElementById('kStatus').textContent = '-';
-            document.getElementById('phStatus').textContent = '-';
-            els.plantName.textContent = 'Waiting';
-            els.plantReason.textContent = 'Scan warna indikator tanah terlebih dahulu untuk melihat rekomendasi tanaman.';
-            els.plantGuide.textContent = 'Plant guide will appear here';
-            els.plantTips.textContent = 'Hasil rekomendasi akan menyesuaikan nilai Nitrogen, Fosfor, Kalium, dan pH.';
-            els.plantIcon.innerHTML = iconSvg('chilli', '#c96f4c');
+        // ---------------------- TABEL REKOMENDASI ----------------------
+        function updatePlantTable(scanResult) {
+            if (!scanResult || scanResult.n === null || scanResult.p === null || scanResult.k === null || scanResult.ph === null) {
+                els.plantTable.classList.add('hidden');
+                els.plantTableContainer.querySelector('p')?.classList.remove('hidden');
+                // disable nutri buttons
+                els.nutriButtons.forEach(btn => btn.classList.add('disabled'));
+                els.nutriPlaceholder.textContent = 'Pilih tanaman dari tabel di atas untuk melihat kebutuhan nutrisinya.';
+                return;
+            }
+            const placeholder = els.plantTableContainer.querySelector('p');
+            if (placeholder) placeholder.classList.add('hidden');
+            els.plantTable.classList.remove('hidden');
+
+            const scored = allPlants.map(plant => ({
+                ...plant,
+                match: calculateMatch(scanResult, plant)
+            }));
+            scored.sort((a,b) => b.match - a.match);
+
+            let html = '';
+            scored.forEach(p => {
+                const color = p.color || '#6f9462';
+                html += `<tr data-plant='${JSON.stringify(p)}'>
+                    <td>
+                        <div class="flex items-center gap-2">
+                            <span class="size-4 rounded-full inline-block" style="background:${color}"></span>
+                            <span class="font-bold text-ink">${p.plant}</span>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <span class="badge-match">${p.match}%</span>
+                            <div class="match-bar">
+                                <div class="match-bar-fill" style="width:${p.match}%"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>`;
+            });
+            els.plantTableBody.innerHTML = html;
+
+            // Event klik pada baris -> tampilkan modal + aktifkan nutri buttons
+            document.querySelectorAll('#plantTableBody tr').forEach(row => {
+                row.addEventListener('click', function() {
+                    const plantData = JSON.parse(this.dataset.plant);
+                    selectedPlant = plantData;
+                    showPlantModal(plantData);
+                    enableNutriButtons(plantData);
+                });
+            });
+        }
+
+        // ---------------------- MODAL TANAMAN ----------------------
+        function showPlantModal(plant) {
+            els.modalTitle.textContent = plant.plant;
+            els.modalN.textContent = plant.n + '%';
+            els.modalP.textContent = plant.p + '%';
+            els.modalK.textContent = plant.k + '%';
+            els.modalPH.textContent = plant.ph.toFixed(1);
+            els.modalReason.textContent = plant.reason;
+            els.modalGuide.textContent = plant.guide;
+            els.modalTips.textContent = plant.tips;
+            els.modal.classList.add('active');
+        }
+
+        function closePlantModal() {
+            els.modal.classList.remove('active');
+        }
+
+        // ---------------------- NUTRISI BUTTONS ----------------------
+        function enableNutriButtons(plant) {
+            els.nutriButtons.forEach(btn => {
+                btn.classList.remove('disabled');
+            });
+            els.nutriPlaceholder.textContent = `Klik tombol di bawah untuk detail kebutuhan ${plant.plant}.`;
+            // Simpan data tanaman di setiap tombol
+            els.nutriButtons.forEach(btn => {
+                btn.dataset.plant = JSON.stringify(plant);
+            });
+        }
+
+        function showNutriModal(nutriKey, plant) {
+            if (!plant || !plant.nutri || !plant.nutri[nutriKey]) {
+                return;
+            }
+            const data = plant.nutri[nutriKey];
+            const labels = { n: 'Nitrogen (N)', p: 'Fosfor (P)', k: 'Kalium (K)', ph: 'pH Tanah' };
+            const currentValue = plant[nutriKey];
+            const currentLabel = nutriKey === 'ph' ? currentValue.toFixed(1) : currentValue + '%';
+
+            els.nutriModalTitle.textContent = labels[nutriKey] || nutriKey.toUpperCase();
+            els.nutriIdeal.textContent = data.ideal || '-';
+            els.nutriCurrent.textContent = currentLabel;
+            els.nutriStatus.textContent = quality(currentValue, nutriKey);
+            els.nutriDescription.textContent = data.desc || 'Informasi tidak tersedia.';
+            els.nutriTips.textContent = data.tips || 'Tidak ada tips khusus.';
+            els.nutriLink.href = data.link || '#';
+            els.nutriLink.textContent = data.link ? '📄 Info lebih lanjut' : '📄 Tidak tersedia';
+            els.nutriModal.classList.add('active');
+        }
+
+        function closeNutriModal() {
+            els.nutriModal.classList.remove('active');
+        }
+
+        // ---------------------- SCAN LOGIC ----------------------
+        function updateScanStageUi() {
+            const isComplete = activeScanIndex >= scanStages.length;
+            const currentStage = scanStages[Math.min(activeScanIndex, scanStages.length - 1)];
+
+            els.scanSteps.forEach((step, index) => {
+                const isCurrent = index === activeScanIndex;
+                const isDone = index < activeScanIndex;
+                step.classList.toggle('bg-ink', isCurrent);
+                step.classList.toggle('text-white', isCurrent);
+                step.classList.toggle('border-ink', isCurrent);
+                step.classList.toggle('bg-leaf/10', isDone && !isCurrent);
+                step.classList.toggle('text-leaf', isDone && !isCurrent);
+                step.classList.toggle('border-leaf/35', isDone && !isCurrent);
+                step.classList.toggle('bg-white/75', !isCurrent && !isDone);
+                step.classList.toggle('text-soil', !isCurrent && !isDone);
+                step.classList.toggle('border-coral/35', !isCurrent && !isDone);
+            });
+
+            if (isComplete) {
+                els.status.textContent = 'Completed';
+                els.scanCamera.textContent = 'Selesai';
+                els.scanCamera.disabled = true;
+                els.scanCamera.classList.add('opacity-60', 'cursor-not-allowed');
+                els.cameraHint.textContent = 'Semua tahap selesai.';
+                return;
+            }
+
+            els.status.textContent = `Tahap ${currentStage.short}`;
+            els.scanCamera.textContent = `Scan ${currentStage.short}`;
+            els.scanCamera.disabled = false;
+            els.scanCamera.classList.remove('opacity-60', 'cursor-not-allowed');
+            els.cameraHint.textContent = `Tahap ${activeScanIndex+1}/4: arahkan ke indikator ${currentStage.label}, tekan Scan ${currentStage.short}.`;
         }
 
         function runScan(data) {
-            els.status.textContent = 'Scanning';
+            if (activeScanIndex >= scanStages.length) {
+                els.cameraHint.textContent = 'Scan sudah lengkap. Tekan Reset untuk memulai ulang.';
+                return;
+            }
+
+            const stage = scanStages[activeScanIndex];
+            const value = data[stage.key];
+            els.status.textContent = 'Scanning...';
             els.beam.classList.remove('hidden');
             els.beam.classList.add('animate-scan');
 
-            window.setTimeout(() => {
-                applyResult(data);
-                els.status.textContent = 'Completed';
+            setTimeout(() => {
+                stagedResult[stage.key] = value;
+                if (stage.key === 'ph') {
+                    setBar(stage.key, value, `pH tanah ${value.toFixed(1)}`);
+                } else {
+                    setBar(stage.key, value, `${stage.label} ${value}${stage.unit}`);
+                }
+                activeScanIndex += 1;
+
+                if (stagedResult.n !== null && stagedResult.p !== null && stagedResult.k !== null && stagedResult.ph !== null) {
+                    updatePlantTable(stagedResult);
+                } else {
+                    els.plantTable.classList.add('hidden');
+                    const p = els.plantTableContainer.querySelector('p');
+                    if (p) p.classList.remove('hidden');
+                    els.nutriButtons.forEach(btn => btn.classList.add('disabled'));
+                    els.nutriPlaceholder.textContent = 'Lakukan scan 4 warna untuk melihat rekomendasi tanaman.';
+                }
+
                 els.beam.classList.add('hidden');
                 els.beam.classList.remove('animate-scan');
+                updateScanStageUi();
             }, 900);
         }
 
-        function fromColorToSample(r, g, b) {
-            if (r > 180 && g < 130 && b > 120) return samples.acidic;
-            if (r > 185 && g > 140 && b < 115) return samples.sandy;
-            if (g > r && g > b) return samples.neutral;
-            return samples.volcanic;
-        }
-
-        function clamp(value, min, max) {
-            return Math.max(min, Math.min(max, value));
-        }
-
-        function resultFromColor(r, g, b) {
-            const base = fromColorToSample(r, g, b);
-            const brightness = (r + g + b) / 765;
-            const greenScore = g / 255;
-            const redScore = r / 255;
-            const blueScore = b / 255;
-            const yellowScore = (r + g - Math.abs(r - g) - b) / 255;
-
-            const data = { ...base };
-            data.n = clamp(Math.round(28 + greenScore * 38 + (1 - brightness) * 24), 18, 92);
-            data.p = clamp(Math.round(30 + redScore * 24 + blueScore * 14 + brightness * 18), 16, 88);
-            data.k = clamp(Math.round(32 + yellowScore * 28 + redScore * 16 + (1 - blueScore) * 12), 18, 92);
-
-            if (base === samples.acidic) {
-                data.ph = clamp(5.1 + brightness * 1.1, 4.8, 6.2);
-            } else if (base === samples.sandy) {
-                data.ph = clamp(6.8 + brightness * 1.0, 6.6, 7.8);
-            } else if (base === samples.neutral) {
-                data.ph = clamp(6.2 + greenScore * 0.9, 6.1, 7.2);
-            } else {
-                data.ph = clamp(5.8 + (1 - brightness) * 1.0, 5.7, 6.9);
-            }
-
-            data.ph = Number(data.ph.toFixed(1));
-            return data;
-        }
-
-        function updateColorReadout(r, g, b) {
-            const rounded = [r, g, b].map((value) => Math.round(value));
-            els.colorPreview.style.backgroundColor = `rgb(${rounded[0]}, ${rounded[1]}, ${rounded[2]})`;
-            els.rgbValue.textContent = `RGB ${rounded[0]}, ${rounded[1]}, ${rounded[2]}`;
-        }
-
-        function averagePixels(pixels) {
-            let r = 0;
-            let g = 0;
-            let b = 0;
-            const count = pixels.length / 4;
-            for (let i = 0; i < pixels.length; i += 4) {
-                r += pixels[i];
-                g += pixels[i + 1];
-                b += pixels[i + 2];
-            }
-            return [r / count, g / count, b / count];
-        }
-
+        // ---------------------- KAMERA ----------------------
         async function startCamera() {
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                els.cameraHint.textContent = 'Browser ini belum mendukung akses kamera.';
-                els.status.textContent = 'Camera unavailable';
-                return;
-            }
-
+            if (cameraStream) stopCamera();
+            const constraints = {
+                video: {
+                    facingMode: { exact: "environment" },
+                    width: { ideal: 1280 },
+                    height: { ideal: 720 }
+                }
+            };
             try {
-                cameraStream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: { ideal: 'environment' },
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    },
-                    audio: false
-                });
-                els.video.srcObject = cameraStream;
-                els.status.textContent = 'Camera ready';
-                els.cameraHint.textContent = 'Kamera aktif. Arahkan kotak tengah ke warna indikator, lalu tekan Scan.';
+                els.status.textContent = 'Membuka kamera...';
+                cameraStream = await navigator.mediaDevices.getUserMedia(constraints);
+                setupVideoStream(cameraStream);
             } catch (error) {
-                els.status.textContent = 'Camera blocked';
-                els.cameraHint.textContent = 'Izin kamera ditolak atau halaman belum dibuka lewat HTTPS/localhost.';
+                try {
+                    const fallback = { video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } } };
+                    cameraStream = await navigator.mediaDevices.getUserMedia(fallback);
+                    setupVideoStream(cameraStream);
+                } catch (err) {
+                    els.status.textContent = 'Gagal akses kamera';
+                    els.cameraHint.textContent = 'Tidak dapat mengakses kamera belakang. Pastikan izin diberikan.';
+                    if (cameraStream) { cameraStream.getTracks().forEach(t=>t.stop()); cameraStream=null; }
+                }
             }
+        }
+
+        function setupVideoStream(stream) {
+            els.video.srcObject = stream;
+            els.video.muted = true;
+            els.video.autoplay = true;
+            els.video.playsInline = true;
+            els.video.onloadedmetadata = () => {
+                els.video.play().then(() => {
+                    videoReady = true;
+                    els.status.textContent = 'Kamera siap';
+                    els.cameraHint.textContent = 'Kamera aktif.';
+                }).catch(() => { videoReady = false; });
+            };
         }
 
         function stopCamera() {
-            if (!cameraStream) return;
-            cameraStream.getTracks().forEach((track) => track.stop());
-            cameraStream = null;
-            els.video.srcObject = null;
-            els.status.textContent = 'Ready';
-            els.cameraHint.textContent = 'Kamera dihentikan. Tekan Mulai Kamera untuk scan lagi.';
+            if (cameraStream) {
+                cameraStream.getTracks().forEach(t=>t.stop());
+                cameraStream = null;
+                els.video.srcObject = null;
+                videoReady = false;
+                updateScanStageUi();
+                els.cameraHint.textContent = 'Kamera dihentikan.';
+            }
         }
 
         function scanCameraFrame() {
-            if (!cameraStream || els.video.readyState < 2) {
-                els.cameraHint.textContent = 'Mulai kamera terlebih dahulu, lalu tunggu preview muncul.';
+            if (!cameraStream || !videoReady || els.video.readyState < 2) {
+                els.cameraHint.textContent = 'Kamera belum siap.';
                 return;
             }
-
-            const context = els.canvas.getContext('2d', { willReadFrequently: true });
+            const ctx = els.canvas.getContext('2d', { willReadFrequently: true });
             const sampleSize = 80;
             els.canvas.width = sampleSize;
             els.canvas.height = sampleSize;
             const sourceSize = Math.min(els.video.videoWidth, els.video.videoHeight) * 0.28;
             const sx = (els.video.videoWidth - sourceSize) / 2;
             const sy = (els.video.videoHeight - sourceSize) / 2;
-            context.drawImage(els.video, sx, sy, sourceSize, sourceSize, 0, 0, sampleSize, sampleSize);
-            const [r, g, b] = averagePixels(context.getImageData(0, 0, sampleSize, sampleSize).data);
+            ctx.drawImage(els.video, sx, sy, sourceSize, sourceSize, 0, 0, sampleSize, sampleSize);
+            const [r, g, b] = averagePixels(ctx.getImageData(0, 0, sampleSize, sampleSize).data);
             updateColorReadout(r, g, b);
             runScan(resultFromColor(r, g, b));
         }
 
-        document.querySelectorAll('.sample-btn').forEach((button) => {
-            button.addEventListener('click', () => runScan(samples[button.dataset.sample]));
+        function averagePixels(pixels) {
+            let r=0,g=0,b=0; const count = pixels.length/4;
+            for (let i=0; i<pixels.length; i+=4) { r+=pixels[i]; g+=pixels[i+1]; b+=pixels[i+2]; }
+            return [r/count, g/count, b/count];
+        }
+
+        function updateColorReadout(r,g,b) {
+            const rounded = [r,g,b].map(Math.round);
+            els.colorPreview.style.backgroundColor = `rgb(${rounded[0]},${rounded[1]},${rounded[2]})`;
+            els.rgbValue.textContent = `RGB ${rounded[0]}, ${rounded[1]}, ${rounded[2]}`;
+        }
+
+        function fromColorToSample(r,g,b) {
+            if (r>180 && g<130 && b>120) return samples.acidic;
+            if (r>185 && g>140 && b<115) return samples.sandy;
+            if (g>r && g>b) return samples.neutral;
+            return samples.volcanic;
+        }
+
+        function clamp(v,min,max) { return Math.max(min, Math.min(max, v)); }
+
+        function resultFromColor(r,g,b) {
+            const base = fromColorToSample(r,g,b);
+            const brightness = (r+g+b)/765;
+            const greenScore = g/255, redScore = r/255, blueScore = b/255;
+            const yellowScore = (r+g - Math.abs(r-g) - b)/255;
+            const data = { ...base };
+            data.n = clamp(Math.round(28 + greenScore*38 + (1-brightness)*24), 18, 92);
+            data.p = clamp(Math.round(30 + redScore*24 + blueScore*14 + brightness*18), 16, 88);
+            data.k = clamp(Math.round(32 + yellowScore*28 + redScore*16 + (1-blueScore)*12), 18, 92);
+            if (base === samples.acidic) data.ph = clamp(5.1 + brightness*1.1, 4.8, 6.2);
+            else if (base === samples.sandy) data.ph = clamp(6.8 + brightness*1.0, 6.6, 7.8);
+            else if (base === samples.neutral) data.ph = clamp(6.2 + greenScore*0.9, 6.1, 7.2);
+            else data.ph = clamp(5.8 + (1-brightness)*1.0, 5.7, 6.9);
+            data.ph = Number(data.ph.toFixed(1));
+            return data;
+        }
+
+        // ---------------------- EVENT LISTENERS ----------------------
+        document.querySelectorAll('.sample-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const data = samples[btn.dataset.sample];
+                runScan(data);
+            });
         });
 
-        els.imageInput.addEventListener('change', (event) => {
-            const file = event.target.files && event.target.files[0];
+        els.imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
             if (!file) return;
-
-            const image = new Image();
-            image.onload = () => {
-                const context = els.canvas.getContext('2d', { willReadFrequently: true });
-                els.canvas.width = 40;
-                els.canvas.height = 40;
-                context.drawImage(image, 0, 0, 40, 40);
-                const [r, g, b] = averagePixels(context.getImageData(0, 0, 40, 40).data);
-                updateColorReadout(r, g, b);
-                runScan(resultFromColor(r, g, b));
+            const img = new Image();
+            img.onload = () => {
+                const ctx = els.canvas.getContext('2d', { willReadFrequently: true });
+                els.canvas.width = 40; els.canvas.height = 40;
+                ctx.drawImage(img, 0, 0, 40, 40);
+                const [r,g,b] = averagePixels(ctx.getImageData(0,0,40,40).data);
+                updateColorReadout(r,g,b);
+                runScan(resultFromColor(r,g,b));
             };
-            image.src = URL.createObjectURL(file);
+            img.src = URL.createObjectURL(file);
         });
 
         els.startCamera.addEventListener('click', startCamera);
         els.stopCamera.addEventListener('click', stopCamera);
         els.scanCamera.addEventListener('click', scanCameraFrame);
 
-        els.reset.addEventListener('click', () => {
-            els.status.textContent = 'Ready';
-            clearResult();
-            els.rgbValue.textContent = 'RGB belum tersedia';
-            els.colorPreview.style.backgroundColor = '#ef8b76';
+        // Nutrisi button click
+        els.nutriButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('disabled')) return;
+                const plantStr = this.dataset.plant;
+                if (!plantStr) return;
+                const plant = JSON.parse(plantStr);
+                const key = this.dataset.nutri;
+                showNutriModal(key, plant);
+            });
         });
 
-        clearResult();
+        // Reset
+        els.reset.addEventListener('click', () => {
+            activeScanIndex = 0;
+            stagedResult = { n: null, p: null, k: null, ph: null };
+            ['n','p','k','ph'].forEach(key => {
+                setBar(key, key==='ph'?1.1:8, key==='ph'?'pH belum discan':`${key.toUpperCase()} belum discan`);
+                document.getElementById(`${key}Status`).textContent = '-';
+            });
+            els.plantTable.classList.add('hidden');
+            const placeholder = els.plantTableContainer.querySelector('p');
+            if (placeholder) placeholder.classList.remove('hidden');
+            els.nutriButtons.forEach(btn => btn.classList.add('disabled'));
+            els.nutriPlaceholder.textContent = 'Lakukan scan 4 warna untuk melihat rekomendasi tanaman.';
+            els.rgbValue.textContent = 'RGB belum tersedia';
+            els.colorPreview.style.backgroundColor = '#ef8b76';
+            selectedPlant = null;
+            updateScanStageUi();
+            closePlantModal();
+            closeNutriModal();
+        });
+
+        // Modal close
+        els.modalClose.addEventListener('click', closePlantModal);
+        els.modal.addEventListener('click', (e) => {
+            if (e.target === els.modal) closePlantModal();
+        });
+        els.nutriModalClose.addEventListener('click', closeNutriModal);
+        els.nutriModal.addEventListener('click', (e) => {
+            if (e.target === els.nutriModal) closeNutriModal();
+        });
+
+        // Inisialisasi
+        updateScanStageUi();
         lucide.createIcons();
+
+        // Jika tidak support kamera
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            els.startCamera.disabled = true;
+            els.scanCamera.disabled = true;
+            els.cameraHint.textContent = 'Browser tidak mendukung kamera.';
+        }
     </script>
 </body>
 </html>

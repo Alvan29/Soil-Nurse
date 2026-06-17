@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants Database - Soil Nurse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Trebuchet MS"', '"Segoe UI"', 'ui-sans-serif', 'system-ui'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        cream: '#f8eadf',
+                        peach: '#f8d8c3',
+                        clay: '#c96f4c',
+                        coral: '#ef8b76',
+                        mint: '#a8d8d6',
+                        leaf: '#6f9462',
+                        ocean: '#9ed2e7',
+                        ink: '#24415f',
+                        soil: '#74513f'
+                    },
+                    boxShadow: {
+                        soft: '0 20px 45px rgba(92, 64, 45, 0.14)',
+                        panel: '0 10px 24px rgba(198, 111, 76, 0.13)'
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { transform: 'translateY(14px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    },
+                    animation: {
+                        fadeUp: 'fadeUp .55s ease-out both',
+                        float: 'float 4s ease-in-out infinite'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="min-h-screen bg-[#e8f1ec] text-ink antialiased">
+    <main class="relative mx-auto min-h-screen w-full max-w-[540px] overflow-hidden bg-cream pb-24 shadow-soft">
+        <header class="sticky top-0 z-40 flex h-[6.25rem] items-center justify-between border-b border-white/35 bg-peach px-5">
+            <a href="../index.html" class="flex items-center gap-3" aria-label="Soil Nurse beranda">
+                <img src="images/Logo.png" alt="Logo Soil Nurse" class="h-16 w-auto object-contain">
+                <img src="images/LogoText.png" alt="Soil Nurse" class="h-10 w-auto object-contain">
+            </a>
+            <button class="rounded-full p-2 text-soil transition hover:bg-white/35" aria-label="Buka menu">
+                <i data-lucide="menu" class="size-8 stroke-[2.2]"></i>
+            </button>
+        </header>
+
+        <section class="relative px-5 pb-5 pt-7">
+            <div class="absolute -right-24 top-4 size-56 rounded-full bg-mint/45 blur-3xl"></div>
+            <div class="absolute -left-20 bottom-0 size-44 rounded-full bg-ocean/30 blur-3xl"></div>
+
+            <div class="relative z-10 animate-fadeUp">
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/45 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-leaf">
+                    <i data-lucide="sprout" class="size-4"></i>
+                    Plant database
+                </div>
+                <div class="grid grid-cols-[1fr_auto] items-end gap-3">
+                    <div>
+                        <h1 class="font-display text-4xl font-black italic leading-none text-clay">Orange Leaf Plant</h1>
+                        <p class="mt-3 max-w-[19rem] text-sm leading-6 text-soil/78">
+                            Informasi dasar tanaman untuk membantu Soil Nurse memberi rekomendasi tanam yang lebih jelas.
+                        </p>
+                    </div>
+                    <div class="hidden size-20 items-center justify-center rounded-full border-[6px] border-white bg-[#f9f5ec] shadow-panel sm:flex">
+                        <svg viewBox="0 0 100 100" class="size-14" aria-hidden="true">
+                            <path d="M22 68c22-3 34-16 39-39 18 15 17 45-7 55-12 5-24 0-32-16Z" fill="#6f9462"/>
+                            <path d="M56 29c11 4 20 13 24 25" fill="none" stroke="#24415f" stroke-width="6" stroke-linecap="round"/>
+                            <circle cx="68" cy="30" r="8" fill="#c96f4c"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="px-5">
+            <div class="mb-3 flex items-center justify-between gap-3">
+                <h2 class="font-display text-2xl font-black italic text-clay">Basic Plant Information</h2>
+                <span class="rounded-full bg-leaf/10 px-3 py-1 text-xs font-bold text-leaf">Easy grow</span>
+            </div>
+
+            <div class="space-y-3 rounded-[2rem] border border-coral/35 bg-white/40 p-3 shadow-panel">
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">Plant Name</h3>
+                    <div class="grid grid-cols-2 divide-x divide-coral/25">
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Common Name</p>
+                            <p class="mt-2 text-base font-bold text-soil">Kaffir Lime</p>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Latin Name</p>
+                            <p class="mt-2 text-base font-bold italic text-soil">Citrus Hystrix</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">Life Cycle</h3>
+                    <p class="p-4 text-base font-bold text-soil">Annual</p>
+                </article>
+
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">Harvest</h3>
+                    <div class="grid grid-cols-2 divide-x divide-coral/25 border-b border-coral/25">
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">First Cycle</p>
+                            <p class="mt-2 font-semibold text-soil">10-12 months</p>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Subsequent Cycle</p>
+                            <p class="mt-2 font-semibold text-soil">3-6 months</p>
+                        </div>
+                    </div>
+                    <p class="p-4 text-sm leading-6 text-soil/80">Regular pruning of the top helps stimulate new shoot growth.</p>
+                </article>
+
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">Growing Season</h3>
+                    <p class="border-b border-coral/25 p-4 text-sm leading-6 text-soil/80">Warm climate. Early to mid-rainy season. Requires adequate moisture and optimal sunlight.</p>
+                    <div class="p-4">
+                        <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Temperature</p>
+                        <p class="mt-2 font-semibold text-soil">20-38&deg;C</p>
+                    </div>
+                </article>
+
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">Plant Origin</h3>
+                    <p class="border-b border-coral/25 p-4 text-sm leading-6 text-soil/80">Tropical regions of Asia that prefer a warm climate.</p>
+                    <div class="grid grid-cols-2 divide-x divide-coral/25">
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Planting</p>
+                            <p class="mt-2 font-semibold text-soil">Grows 2-12 meters</p>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Potted Plant</p>
+                            <p class="mt-2 font-semibold text-soil">Grows 3-6 meters</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">Difficulty Level</h3>
+                    <p class="border-b border-coral/25 p-4 text-base font-bold text-soil">Low to moderate. Easy to grow</p>
+                    <p class="p-4 text-sm leading-6 text-soil/80">Requires attention to daily care. Needs optimal sunlight and regular watering but must not be overwatered.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="px-5 pt-5">
+            <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl border border-coral/35 bg-white/42 p-4 shadow-panel">
+                    <div class="mb-3 flex size-10 items-center justify-center rounded-full bg-leaf/15 text-leaf">
+                        <i data-lucide="sun" class="size-5"></i>
+                    </div>
+                    <p class="text-xs font-bold uppercase tracking-[0.14em] text-clay">Sunlight</p>
+                    <p class="mt-1 text-sm font-semibold text-soil">Optimal sunlight</p>
+                </div>
+                <div class="rounded-2xl border border-coral/35 bg-white/42 p-4 shadow-panel">
+                    <div class="mb-3 flex size-10 items-center justify-center rounded-full bg-ocean/30 text-ink">
+                        <i data-lucide="droplets" class="size-5"></i>
+                    </div>
+                    <p class="text-xs font-bold uppercase tracking-[0.14em] text-clay">Watering</p>
+                    <p class="mt-1 text-sm font-semibold text-soil">Regular, not excessive</p>
+                </div>
+            </div>
+        </section>
+
+        <nav class="fixed bottom-0 left-1/2 z-50 flex h-16 w-full max-w-[540px] -translate-x-1/2 items-center justify-around bg-ocean text-white">
+            <a href="about.html" class="flex h-full flex-1 items-center justify-center" aria-label="Tentang Soil Nurse">
+                <i data-lucide="clipboard-list" class="size-8 stroke-[1.8]"></i>
+            </a>
+            <a href="../index.html#scanner" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
+                <i data-lucide="search" class="size-9 stroke-[1.8]"></i>
+            </a>
+            <a href="../index.html#scanner" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
+                <div class="absolute -top-5 flex size-[4.5rem] items-center justify-center rounded-full bg-ocean">
+                    <i data-lucide="scan-line" class="size-11 stroke-[1.7]"></i>
+                </div>
+                <span class="absolute bottom-0.5 text-xl font-bold italic leading-none">Scan</span>
+            </a>
+            <a href="plants_database.html" class="flex h-full flex-1 items-center justify-center text-ink" aria-label="Database tanaman">
+                <i data-lucide="sprout" class="size-8 stroke-[2.2]"></i>
+            </a>
+            <a href="../index.html#home" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
+                <i data-lucide="user-round" class="size-9 stroke-[1.8]"></i>
+            </a>
+        </nav>
+    </main>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
