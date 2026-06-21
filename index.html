@@ -287,7 +287,7 @@
                         <p id="cameraHint" class="mt-3 text-xs leading-5 text-soil/70">Tahap 1/4: arahkan kotak tengah ke warna indikator Nitrogen (N), lalu tekan Scan N.</p>
                     </div>
 
-                    <div class="grid grid-cols-4 gap-3">
+                    <!-- <div class="grid grid-cols-4 gap-3">
                         <button data-sample="volcanic" class="sample-btn group min-h-[5.5rem] rounded-2xl border border-coral/35 bg-white/75 p-3 text-left shadow-sm transition hover:-translate-y-1 hover:border-clay">
                             <span class="mb-3 block h-7 rounded-full bg-[#8f4f3d]"></span>
                             <span class="text-xs font-bold text-soil">Merah Bata</span>
@@ -304,7 +304,7 @@
                             <span class="mb-3 block h-7 rounded-full bg-[#d76d86]"></span>
                             <span class="text-xs font-bold text-soil">Merah Muda</span>
                         </button>
-                    </div>
+                    </div> -->
 
                     <label class="mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-2xl bg-ocean/55 px-4 py-3 text-sm font-bold text-ink transition hover:bg-ocean">
                         <i data-lucide="image-up" class="size-5"></i>
@@ -392,26 +392,38 @@
         </section>
 
         <!-- KEBUTUHAN NUTRISI (LINGKARAN) -->
-        <section class="px-5 mb-6">
+        <section class="px-5 mb-20">
             <h2 class="mb-3 font-display text-3xl font-black italic text-clay">🧪 Kebutuhan Nutrisi</h2>
             <div class="rounded-[2rem] border border-coral/45 bg-white/42 p-4 shadow-panel">
                 <p id="nutriPlaceholder" class="text-sm text-soil/70 mb-3">Pilih tanaman dari tabel di atas untuk melihat kebutuhan nutrisinya.</p>
-                <div id="nutriButtons" class="flex justify-around items-center gap-2">
-                    <button class="nutri-btn nutri-btn-n disabled" data-nutri="n">
-                        <span class="icon">🌿</span>
-                        <span class="label">N</span>
+                <div id="nutriButtons" class="grid grid-cols-4 items-center gap-2">
+                    <button class="nutri-btn nutri-btn-n disabled size-20" data-nutri="n">
+                        <span class="icon">🌱</span>
+                        <span class="label">Ph ideal jenis tanah</span>
                     </button>
-                    <button class="nutri-btn nutri-btn-p disabled" data-nutri="p">
+                    <button class="nutri-btn nutri-btn-p disabled size-20" data-nutri="p">
                         <span class="icon">🪨</span>
-                        <span class="label">P</span>
+                        <span class="label">Masalah Ph Lebih</span>
                     </button>
-                    <button class="nutri-btn nutri-btn-k disabled" data-nutri="k">
-                        <span class="icon">🍌</span>
-                        <span class="label">K</span>
-                    </button>
-                    <button class="nutri-btn nutri-btn-ph disabled" data-nutri="ph">
+                    <button class="nutri-btn nutri-btn-k disabled size-20" data-nutri="k">
                         <span class="icon">🧪</span>
-                        <span class="label">pH</span>
+                        <span class="label">Masalah pH Kurang</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                        <span class="icon">♨️</span>
+                        <span class="label">Kebutuhan Nitrogen</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                        <span class="icon">🍂</span>
+                        <span class="label">Kebutuhan Posfor</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                        <span class="icon">🪨</span>
+                        <span class="label">Kebutuhan Kalium</span>
+                    </button>
+                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                        <span class="icon">🫙</span>
+                        <span class="label">Kebutuhan Unsur Hara</span>
                     </button>
                 </div>
             </div>
