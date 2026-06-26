@@ -196,6 +196,46 @@
         .nutri-btn-p { background: #c96f4c; }
         .nutri-btn-k { background: #d4a24c; }
         .nutri-btn-ph { background: #4c8fc9; }
+        /* Warna tambahan untuk tombol baru */
+        .nutri-btn-npk { background: #5a7a9a; }
+        .nutri-btn-other { background: #9b6b7a; }
+
+        .plant-resource-btn {
+            min-height: 4.4rem;
+            border: 1.8px solid #24415f;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.46);
+            color: #24415f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.55rem;
+            padding: 0.9rem;
+            text-align: center;
+            font-weight: 900;
+            line-height: 1.15;
+            text-decoration: none;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+        .plant-resource-btn:hover {
+            transform: translateY(-2px);
+            border-color: #c96f4c;
+            background: rgba(255, 255, 255, 0.72);
+        }
+        .plant-resource-btn.disabled {
+            opacity: 0.42;
+            pointer-events: none;
+            filter: grayscale(0.4);
+        }
+        .plant-resource-primary {
+            min-height: 9.4rem;
+            font-size: 1rem;
+        }
+        /* Tombol resource di bawah nutrisi - ukuran normal */
+        .nutri-resource-btn {
+            min-height: 4rem;
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body class="min-h-screen bg-[#e8f1ec] text-ink antialiased">
@@ -267,7 +307,7 @@
                                 <span id="colorPreview" class="size-10 rounded-full border-4 border-white bg-coral shadow"></span>
                                 <div>
                                     <p class="text-xs font-bold uppercase tracking-[0.16em] text-leaf">Warna terbaca</p>
-                                    <p id="rgbValue" class="text-sm font-bold text-soil">RGB belum tersedia</p>
+                                    <p id="rgbValue" class="text-sm font-bold text-soil">HSV belum tersedia</p>
                                 </div>
                             </div>
                             <button id="scanCameraBtn" class="rounded-full bg-clay px-4 py-2 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-soil">
@@ -287,7 +327,9 @@
                         <p id="cameraHint" class="mt-3 text-xs leading-5 text-soil/70">Tahap 1/4: arahkan kotak tengah ke warna indikator Nitrogen (N), lalu tekan Scan N.</p>
                     </div>
 
-                    <!-- <div class="grid grid-cols-4 gap-3">
+                    <!-- Tombol sampel warna (disembunyikan, bisa diaktifkan jika diperlukan) -->
+                    <!--
+                    <div class="grid grid-cols-4 gap-3">
                         <button data-sample="volcanic" class="sample-btn group min-h-[5.5rem] rounded-2xl border border-coral/35 bg-white/75 p-3 text-left shadow-sm transition hover:-translate-y-1 hover:border-clay">
                             <span class="mb-3 block h-7 rounded-full bg-[#8f4f3d]"></span>
                             <span class="text-xs font-bold text-soil">Merah Bata</span>
@@ -304,7 +346,8 @@
                             <span class="mb-3 block h-7 rounded-full bg-[#d76d86]"></span>
                             <span class="text-xs font-bold text-soil">Merah Muda</span>
                         </button>
-                    </div> -->
+                    </div>
+                    -->
 
                     <label class="mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-2xl bg-ocean/55 px-4 py-3 text-sm font-bold text-ink transition hover:bg-ocean">
                         <i data-lucide="image-up" class="size-5"></i>
@@ -391,18 +434,18 @@
             </div>
         </section>
 
-        <!-- KEBUTUHAN NUTRISI (LINGKARAN) -->
+        <!-- KEBUTUHAN NUTRISI (LINGKARAN + TOMBOL RESOURCE) -->
         <section class="px-5 mb-20">
             <h2 class="mb-3 font-display text-3xl font-black italic text-clay">🧪 Kebutuhan Nutrisi</h2>
             <div class="rounded-[2rem] border border-coral/45 bg-white/42 p-4 shadow-panel">
                 <p id="nutriPlaceholder" class="text-sm text-soil/70 mb-3">Pilih tanaman dari tabel di atas untuk melihat kebutuhan nutrisinya.</p>
-                <div id="nutriButtons" class="grid grid-cols-4 items-center gap-2">
+                <div id="nutriButtons" class="grid grid-cols-4 items-center gap-3">
                     <button class="nutri-btn nutri-btn-n disabled size-20" data-nutri="n">
                         <span class="icon">🌱</span>
                         <span class="label">Ph ideal jenis tanah</span>
                     </button>
                     <button class="nutri-btn nutri-btn-p disabled size-20" data-nutri="p">
-                        <span class="icon">🪨</span>
+                        <span class="icon">🧪</span>
                         <span class="label">Masalah Ph Lebih</span>
                     </button>
                     <button class="nutri-btn nutri-btn-k disabled size-20" data-nutri="k">
@@ -413,19 +456,35 @@
                         <span class="icon">♨️</span>
                         <span class="label">Kebutuhan Nitrogen</span>
                     </button>
-                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                    <button class="nutri-btn nutri-btn-npk disabled size-20" data-nutri="n">
                         <span class="icon">🍂</span>
                         <span class="label">Kebutuhan Posfor</span>
                     </button>
-                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                    <button class="nutri-btn nutri-btn-other disabled size-20" data-nutri="p">
                         <span class="icon">🪨</span>
                         <span class="label">Kebutuhan Kalium</span>
                     </button>
-                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="ph">
+                    <button class="nutri-btn nutri-btn-ph disabled size-20" data-nutri="k">
                         <span class="icon">🫙</span>
                         <span class="label">Kebutuhan Unsur Hara</span>
                     </button>
                 </div>
+
+                <!-- 3 tombol link eksternal (seperti di gambar) -->
+                <div id="nutriResourceLinks" class="mt-5 grid grid-cols-2 gap-2 mb-2">
+                    <a id="nutriGuidelinesLink" href="#" target="_blank" rel="noopener noreferrer" class="plant-resource-btn nutri-resource-btn disabled">
+                        <i data-lucide="clipboard-list" class="size-5 shrink-0"></i>
+                        <span>Plant Guidelines</span>
+                    </a>
+                    <a id="nutriPreventionLink" href="#" target="_blank" rel="noopener noreferrer" class="plant-resource-btn nutri-resource-btn disabled">
+                        <i data-lucide="shield-check" class="size-5 shrink-0"></i>
+                        <span>Prevention Tips</span>
+                    </a>
+                </div>
+                <a href="https://docs.google.com/spreadsheets/d/1AuKIORLGe-w-stsouUo3Z8X3Oxpe8KZnUA7J7HENk74/edit?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="plant-resource-btn nutri-resource-btn">
+                    <i data-lucide="book-open-text" class="size-5 shrink-0"></i>
+                    <span>Plant Growth Journal</span>
+                </a>
             </div>
         </section>
 
@@ -494,74 +553,25 @@
         </div>
     </div>
 
+    <!-- Data setiap tanaman dimuat dari file terpisah -->
+    <script src="src/plants/chilli.js"></script>
+    <script src="src/plants/tomato.js"></script>
+    <script src="src/plants/basil.js"></script>
+    <script src="src/plants/onion_leaves.js"></script>
+
     <script>
-        // ===================== DATA TANAMAN (diperluas dengan info nutrisi) =====================
+        // ===================== DATA TANAMAN =====================
+        // Data tiap tanaman dimuat dari: src/plants/<nama>.js
+        // Gunakan objek samples agar kompatibel dengan kode lama.
         const samples = {
-            volcanic: {
-                n: 72, p: 66, k: 81, ph: 6.4,
-                plant: 'Chilli',
-                reason: 'NPK cukup tinggi dan pH sedikit asam, cocok untuk cabai yang butuh tanah subur.',
-                guide: 'How to plant chilli?',
-                tips: 'Tanam di area penuh matahari, beri kompos matang, siram teratur, dan tambahkan mulsa agar tanah stabil.',
-                color: '#dd1f2f',
-                icon: 'chilli',
-                // Info nutrisi spesifik untuk tanaman ini
-                nutri: {
-                    n: { ideal: '70-80%', desc: 'Nitrogen penting untuk pertumbuhan daun dan batang. Cabai membutuhkan nitrogen sedang-tinggi untuk produksi daun yang sehat.', tips: 'Tambahkan pupuk urea atau kompos kaya nitrogen secara bertahap.', link: 'https://example.com/nitrogen-chilli' },
-                    p: { ideal: '60-70%', desc: 'Fosfor mendukung perkembangan akar dan pembungaan. Cabai membutuhkan fosfor cukup untuk hasil buah maksimal.', tips: 'Gunakan pupuk SP-36 atau rock phosphate saat tanam.', link: 'https://example.com/fosfor-chilli' },
-                    k: { ideal: '75-85%', desc: 'Kalium meningkatkan ketahanan terhadap penyakit dan kualitas buah. Cabai sangat responsif terhadap kalium.', tips: 'Berikan pupuk KCL atau abu kayu secara teratur.', link: 'https://example.com/kalium-chilli' },
-                    ph: { ideal: '6.0 - 6.8', desc: 'pH tanah mempengaruhi ketersediaan unsur hara. Cabai tumbuh optimal pada pH agak asam hingga netral.', tips: 'Jika pH terlalu asam, tambahkan kapur dolomit. Jika terlalu basa, tambahkan belerang.', link: 'https://example.com/ph-chilli' }
-                }
-            },
-            neutral: {
-                n: 61, p: 58, k: 64, ph: 6.8,
-                plant: 'Tomato',
-                reason: 'pH mendekati netral dan unsur hara seimbang mendukung pertumbuhan tomat.',
-                guide: 'How to plant tomato?',
-                tips: 'Gunakan ajir sejak awal, beri jarak antar tanaman, dan jaga daun tetap kering untuk mengurangi penyakit.',
-                color: '#e04435',
-                icon: 'tomato',
-                nutri: {
-                    n: { ideal: '55-65%', desc: 'Tomat membutuhkan nitrogen seimbang untuk pertumbuhan vegetatif dan generatif. Terlalu banyak nitrogen dapat mengurangi buah.', tips: 'Gunakan pupuk NPK 16-16-16 pada awal tanam.', link: 'https://example.com/nitrogen-tomato' },
-                    p: { ideal: '50-60%', desc: 'Fosfor penting untuk pembentukan bunga dan buah tomat.', tips: 'Tambahkan tepung tulang atau pupuk fosfat saat persiapan lahan.', link: 'https://example.com/fosfor-tomato' },
-                    k: { ideal: '60-70%', desc: 'Kalium meningkatkan rasa, warna, dan daya simpan tomat.', tips: 'Berikan pupuk kalium saat fase pembungaan.', link: 'https://example.com/kalium-tomato' },
-                    ph: { ideal: '6.2 - 6.8', desc: 'Tomat tumbuh baik pada pH netral hingga sedikit asam.', tips: 'Lakukan tes pH secara berkala dan sesuaikan dengan kapur atau sulfur.', link: 'https://example.com/ph-tomato' }
-                }
-            },
-            sandy: {
-                n: 43, p: 47, k: 56, ph: 7.2,
-                plant: 'Corn',
-                reason: 'Tanah agak netral dengan kalium sedang cocok untuk jagung bila ditambah nitrogen.',
-                guide: 'How to plant corn?',
-                tips: 'Tanam berkelompok agar penyerbukan baik, tambah pupuk nitrogen bertahap, dan siram saat fase pembungaan.',
-                color: '#f0b52d',
-                icon: 'corn',
-                nutri: {
-                    n: { ideal: '40-50%', desc: 'Jagung membutuhkan nitrogen tinggi untuk pertumbuhan batang dan daun.', tips: 'Berikan pupuk nitrogen secara bertahap: 1/3 saat tanam, 1/3 saat tinggi 30cm, 1/3 saat pembungaan.', link: 'https://example.com/nitrogen-corn' },
-                    p: { ideal: '45-55%', desc: 'Fosfor penting untuk perkembangan akar jagung.', tips: 'Pastikan fosfor tersedia di awal tanam.', link: 'https://example.com/fosfor-corn' },
-                    k: { ideal: '50-60%', desc: 'Kalium membantu jagung tahan kekeringan dan meningkatkan kualitas tongkol.', tips: 'Aplikasikan pupuk kalium bersamaan dengan nitrogen.', link: 'https://example.com/kalium-corn' },
-                    ph: { ideal: '6.5 - 7.5', desc: 'Jagung toleran terhadap pH yang lebih luas, tetapi netral adalah yang terbaik.', tips: 'Pantau pH tanah dan lakukan koreksi jika diperlukan.', link: 'https://example.com/ph-corn' }
-                }
-            },
-            acidic: {
-                n: 38, p: 52, k: 44, ph: 5.6,
-                plant: 'Pineapple',
-                reason: 'pH asam cocok untuk nanas, terutama pada tanah yang drainasenya baik.',
-                guide: 'How to plant pineapple?',
-                tips: 'Pilih media porous, hindari genangan, beri kompos ringan, dan tempatkan pada lokasi bercahaya kuat.',
-                color: '#7fa440',
-                icon: 'pineapple',
-                nutri: {
-                    n: { ideal: '35-45%', desc: 'Nanas tidak membutuhkan nitrogen tinggi. Terlalu banyak nitrogen dapat mengurangi rasa manis.', tips: 'Gunakan pupuk organik dengan kandungan nitrogen rendah.', link: 'https://example.com/nitrogen-pineapple' },
-                    p: { ideal: '50-60%', desc: 'Fosfor penting untuk pertumbuhan akar nanas.', tips: 'Berikan pupuk fosfat saat tanam.', link: 'https://example.com/fosfor-pineapple' },
-                    k: { ideal: '40-50%', desc: 'Kalium meningkatkan kualitas buah nanas.', tips: 'Pastikan kalium tersedia saat buah mulai terbentuk.', link: 'https://example.com/kalium-pineapple' },
-                    ph: { ideal: '4.5 - 5.5', desc: 'Nanas tumbuh optimal pada tanah asam.', tips: 'Hindari pengapuran berlebihan pada lahan nanas.', link: 'https://example.com/ph-pineapple' }
-                }
-            }
+            volcanic: PLANT_CHILLI,
+            neutral:  PLANT_TOMATO,
+            sandy:    PLANT_BASIL,
+            acidic:   PLANT_ONION
         };
 
-        // Daftar semua tanaman
-        const allPlants = Object.values(samples);
+        // Daftar semua tanaman untuk keperluan matching skor
+        const allPlants = [PLANT_CHILLI, PLANT_TOMATO, PLANT_BASIL, PLANT_ONION];
 
         // ---------------------- ELEMEN DOM ----------------------
         const els = {
@@ -603,12 +613,19 @@
             nutriStatus: document.getElementById('nutriStatus'),
             nutriDescription: document.getElementById('nutriDescription'),
             nutriTips: document.getElementById('nutriTips'),
-            nutriLink: document.getElementById('nutriLink')
+            nutriLink: document.getElementById('nutriLink'),
+            // Link resources (dua grup)
+            plantJournalLink: document.getElementById('plantJournalLink'),
+            plantGuidelinesLink: document.getElementById('plantGuidelinesLink'),
+            preventionTipsLink: document.getElementById('preventionTipsLink'),
+            nutriJournalLink: document.getElementById('nutriJournalLink'),
+            nutriGuidelinesLink: document.getElementById('nutriGuidelinesLink'),
+            nutriPreventionLink: document.getElementById('nutriPreventionLink')
         };
 
         let cameraStream = null;
         let videoReady = false;
-        let selectedPlant = null; // menyimpan tanaman yang dipilih dari tabel
+        let selectedPlant = null;
 
         const scanStages = [
             { key: 'n', short: 'N', label: 'Nitrogen', unit: '%' },
@@ -666,6 +683,36 @@
             return Math.min(100, Math.round(score));
         }
 
+        // ---------------------- FUNGSI UNTUK LINK RESOURCE (DUA GRUP) ----------------------
+        function buildPlantResourceUrl(plantName, topic) {
+            const query = encodeURIComponent(`${plantName} ${topic}`);
+            return `https://www.google.com/search?q=${query}`;
+        }
+
+        function setResourceLink(linkElement, plant, topic, isEnabled) {
+            if (isEnabled && plant) {
+                linkElement.href = buildPlantResourceUrl(plant.plant, topic);
+                linkElement.classList.remove('disabled');
+            } else {
+                linkElement.href = '#';
+                linkElement.classList.add('disabled');
+            }
+        }
+
+        function updateAllResourceLinks(plant) {
+            const isEnabled = !!(plant && plant.plant);
+
+            // Grup di scanner
+            setResourceLink(els.plantJournalLink, plant, 'plant growth journal', isEnabled);
+            setResourceLink(els.plantGuidelinesLink, plant, 'plant growing guidelines', isEnabled);
+            setResourceLink(els.preventionTipsLink, plant, 'plant disease prevention tips', isEnabled);
+
+            // Grup di bawah nutrisi
+            setResourceLink(els.nutriJournalLink, plant, 'plant growth journal', isEnabled);
+            setResourceLink(els.nutriGuidelinesLink, plant, 'plant growing guidelines', isEnabled);
+            setResourceLink(els.nutriPreventionLink, plant, 'plant disease prevention tips', isEnabled);
+        }
+
         // ---------------------- TABEL REKOMENDASI ----------------------
         function updatePlantTable(scanResult) {
             if (!scanResult || scanResult.n === null || scanResult.p === null || scanResult.k === null || scanResult.ph === null) {
@@ -674,6 +721,7 @@
                 // disable nutri buttons
                 els.nutriButtons.forEach(btn => btn.classList.add('disabled'));
                 els.nutriPlaceholder.textContent = 'Pilih tanaman dari tabel di atas untuk melihat kebutuhan nutrisinya.';
+                updateAllResourceLinks(null);
                 return;
             }
             const placeholder = els.plantTableContainer.querySelector('p');
@@ -708,7 +756,6 @@
             });
             els.plantTableBody.innerHTML = html;
 
-            // Event klik pada baris -> tampilkan modal + aktifkan nutri buttons
             document.querySelectorAll('#plantTableBody tr').forEach(row => {
                 row.addEventListener('click', function() {
                     const plantData = JSON.parse(this.dataset.plant);
@@ -742,10 +789,11 @@
                 btn.classList.remove('disabled');
             });
             els.nutriPlaceholder.textContent = `Klik tombol di bawah untuk detail kebutuhan ${plant.plant}.`;
-            // Simpan data tanaman di setiap tombol
             els.nutriButtons.forEach(btn => {
                 btn.dataset.plant = JSON.stringify(plant);
             });
+            // Update semua link resource (dua grup)
+            updateAllResourceLinks(plant);
         }
 
         function showNutriModal(nutriKey, plant) {
@@ -836,6 +884,7 @@
                     if (p) p.classList.remove('hidden');
                     els.nutriButtons.forEach(btn => btn.classList.add('disabled'));
                     els.nutriPlaceholder.textContent = 'Lakukan scan 4 warna untuk melihat rekomendasi tanaman.';
+                    updateAllResourceLinks(null);
                 }
 
                 els.beam.classList.add('hidden');
@@ -920,34 +969,103 @@
             return [r/count, g/count, b/count];
         }
 
-        function updateColorReadout(r,g,b) {
-            const rounded = [r,g,b].map(Math.round);
+        // ---------------------- KONVERSI RGB → HSV ----------------------
+        /**
+         * Mengubah nilai RGB (0-255) ke HSV.
+         * H: 0-360, S: 0-100, V: 0-100
+         */
+        function rgbToHsv(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const delta = max - min;
+            let h = 0, s = 0, v = Math.round(max * 100);
+            if (delta > 0) {
+                s = Math.round((delta / max) * 100);
+                if (max === r)      h = 60 * (((g - b) / delta) % 6);
+                else if (max === g) h = 60 * (((b - r) / delta) + 2);
+                else               h = 60 * (((r - g) / delta) + 4);
+                if (h < 0) h += 360;
+            }
+            return { h: Math.round(h), s, v };
+        }
+
+        /**
+         * Cek apakah nilai HSV masuk dalam rentang yang ditentukan.
+         * Mendukung Hue melingkar (mis. merah: 340-360 dan 0-20).
+         */
+        function hsvInRange(hsv, range) {
+            const { hMin, hMax, sMin, sMax, vMin, vMax } = range;
+            const sOk = hsv.s >= sMin && hsv.s <= sMax;
+            const vOk = hsv.v >= vMin && hsv.v <= vMax;
+            let hOk;
+            if (hMin <= hMax) {
+                hOk = hsv.h >= hMin && hsv.h <= hMax;
+            } else {
+                // Wrap-around merah (misal hMin=340, hMax=20)
+                hOk = hsv.h >= hMin || hsv.h <= hMax;
+            }
+            return hOk && sOk && vOk;
+        }
+
+        function updateColorReadout(r, g, b) {
+            const rounded = [r, g, b].map(Math.round);
             els.colorPreview.style.backgroundColor = `rgb(${rounded[0]},${rounded[1]},${rounded[2]})`;
-            els.rgbValue.textContent = `RGB ${rounded[0]}, ${rounded[1]}, ${rounded[2]}`;
+            const hsv = rgbToHsv(rounded[0], rounded[1], rounded[2]);
+            els.rgbValue.textContent = `HSV ${hsv.h}°, ${hsv.s}%, ${hsv.v}%`;
         }
 
-        function fromColorToSample(r,g,b) {
-            if (r>180 && g<130 && b>120) return samples.acidic;
-            if (r>185 && g>140 && b<115) return samples.sandy;
-            if (g>r && g>b) return samples.neutral;
-            return samples.volcanic;
+        function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+        /**
+         * Menentukan tanaman referensi berdasarkan HSV warna yang discan.
+         * Urutan pengecekan: acidic → sandy → neutral → volcanic (fallback).
+         * Menggunakan hsvRange dari masing-masing file data tanaman.
+         */
+        function fromColorToSample(hsv) {
+            // Cek setiap sampel: gunakan rentang pH (paling membedakan antarjenis tanah)
+            if (hsvInRange(hsv, samples.acidic.hsvRange.ph))   return samples.acidic;   // nanas (tanah asam)
+            if (hsvInRange(hsv, samples.sandy.hsvRange.ph))    return samples.sandy;    // jagung (netral-basa)
+            if (hsvInRange(hsv, samples.neutral.hsvRange.ph))  return samples.neutral;  // tomat (netral)
+            return samples.volcanic;                                                     // cabai (fallback)
         }
 
-        function clamp(v,min,max) { return Math.max(min, Math.min(max, v)); }
+        /**
+         * Menghitung nilai N, P, K, dan pH dari warna HSV.
+         * Formula menggunakan komponen Hue, Saturation, Value (HSV)
+         * untuk estimasi nilai nutrisi yang lebih akurat dari strip tes warna.
+         */
+        function resultFromColor(r, g, b) {
+            const hsv = rgbToHsv(r, g, b);
+            const base = fromColorToSample(hsv);
 
-        function resultFromColor(r,g,b) {
-            const base = fromColorToSample(r,g,b);
-            const brightness = (r+g+b)/765;
-            const greenScore = g/255, redScore = r/255, blueScore = b/255;
-            const yellowScore = (r+g - Math.abs(r-g) - b)/255;
+            // Normalisasi komponen HSV ke rentang 0-1
+            const hNorm = hsv.h / 360;  // Posisi warna dalam spektrum
+            const sNorm = hsv.s / 100;  // Tingkat saturasi (jenuh/pudar)
+            const vNorm = hsv.v / 100;  // Kecerahan warna
+
+            // Estimasi nutrisi dari komponen HSV:
+            // N (Nitrogen): warna gelap/biru/ungu → V rendah, S tinggi di rentang biru
+            const blueHue  = 1 - Math.abs(hNorm - (240/360)) * 3; // paling tinggi di H=240
+            const greenHue = 1 - Math.abs(hNorm - (120/360)) * 3; // paling tinggi di H=120
+            const redHue   = 1 - Math.min(hNorm, 1 - hNorm) * 6;  // paling tinggi di H=0/360
+            const yellowHue= 1 - Math.abs(hNorm - ( 60/360)) * 3; // paling tinggi di H=60
+
             const data = { ...base };
-            data.n = clamp(Math.round(28 + greenScore*38 + (1-brightness)*24), 18, 92);
-            data.p = clamp(Math.round(30 + redScore*24 + blueScore*14 + brightness*18), 16, 88);
-            data.k = clamp(Math.round(32 + yellowScore*28 + redScore*16 + (1-blueScore)*12), 18, 92);
-            if (base === samples.acidic) data.ph = clamp(5.1 + brightness*1.1, 4.8, 6.2);
-            else if (base === samples.sandy) data.ph = clamp(6.8 + brightness*1.0, 6.6, 7.8);
-            else if (base === samples.neutral) data.ph = clamp(6.2 + greenScore*0.9, 6.1, 7.2);
-            else data.ph = clamp(5.8 + (1-brightness)*1.0, 5.7, 6.9);
+            data.n = clamp(Math.round(25 + Math.max(0, blueHue)*35 + (1 - vNorm)*20 + sNorm*10), 15, 95);
+            data.p = clamp(Math.round(28 + Math.max(0, redHue)*28  + sNorm*18 + vNorm*12), 14, 92);
+            data.k = clamp(Math.round(30 + Math.max(0, yellowHue)*30 + Math.max(0, greenHue)*12 + sNorm*10), 16, 95);
+
+            // pH: Hue spektrum merah (asam) → kuning-hijau (netral) → biru (basa)
+            if (base === samples.acidic)
+                data.ph = clamp(4.5 + vNorm * 1.2 + sNorm * 0.5, 4.5, 6.2);
+            else if (base === samples.sandy)
+                data.ph = clamp(6.8 + vNorm * 0.8 + (1 - sNorm) * 0.4, 6.6, 7.8);
+            else if (base === samples.neutral)
+                data.ph = clamp(6.2 + Math.max(0, greenHue) * 0.8 + vNorm * 0.3, 6.0, 7.2);
+            else
+                data.ph = clamp(5.8 + (1 - vNorm) * 0.9 + sNorm * 0.3, 5.5, 6.9);
+
             data.ph = Number(data.ph.toFixed(1));
             return data;
         }
@@ -1004,7 +1122,8 @@
             if (placeholder) placeholder.classList.remove('hidden');
             els.nutriButtons.forEach(btn => btn.classList.add('disabled'));
             els.nutriPlaceholder.textContent = 'Lakukan scan 4 warna untuk melihat rekomendasi tanaman.';
-            els.rgbValue.textContent = 'RGB belum tersedia';
+            updateAllResourceLinks(null);
+            els.rgbValue.textContent = 'HSV belum tersedia';
             els.colorPreview.style.backgroundColor = '#ef8b76';
             selectedPlant = null;
             updateScanStageUi();
@@ -1026,7 +1145,6 @@
         updateScanStageUi();
         lucide.createIcons();
 
-        // Jika tidak support kamera
         if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
             els.startCamera.disabled = true;
             els.scanCamera.disabled = true;

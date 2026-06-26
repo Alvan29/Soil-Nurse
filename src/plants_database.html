@@ -73,7 +73,7 @@
                     <div>
                         <h1 class="font-display text-4xl font-black italic leading-none text-clay">Plants Database</h1>
                         <p class="mt-3 max-w-[19rem] text-sm leading-6 text-soil/78">
-                            Pilih tanaman untuk melihat informasi dasar, musim tumbuh, panen, dan kebutuhan perawatannya.
+                            Select a plant to view basic information, growing season, harvest, and care requirements.
                         </p>
                     </div>
                     <div class="hidden size-20 items-center justify-center rounded-full border-[6px] border-white bg-[#f9f5ec] shadow-panel sm:flex">
@@ -92,7 +92,7 @@
         <section id="plantDetailView" class="hidden px-5 pb-5 pt-7">
             <button id="backToPlantsBtn" class="mb-4 inline-flex items-center gap-2 rounded-full border border-coral/40 bg-white/50 px-4 py-2 text-xs font-bold text-clay transition hover:bg-coral/10">
                 <i data-lucide="arrow-left" class="size-4"></i>
-                Kembali
+                Back
             </button>
 
             <div class="mb-5 rounded-[2rem] border border-coral/35 bg-white/40 p-4 shadow-panel">
@@ -139,14 +139,14 @@
     <script>
         const plants = [
             {
-                id: 'kaffir-lime',
-                title: 'Orange Leaf Plant',
-                commonName: 'Kaffir Lime',
-                latinName: 'Citrus Hystrix',
+                id: 'makrut lime leaves',
+                title: 'Makrut Lime Leaves',
+                commonName: 'Makrut Lime Leaves',
+                latinName: 'Citrus hystrix',
                 badge: 'Easy grow',
                 color: '#6f9462',
                 accent: '#c96f4c',
-                summary: 'Daun jeruk tropis dengan aroma kuat, cocok untuk iklim hangat dan perawatan harian yang teratur.',
+                summary: 'Tropical citrus leaves with a strong aroma, suitable for warm climates and regular daily care.',
                 lifeCycle: 'Annual',
                 harvestFirst: '10-12 months',
                 harvestNext: '3-6 months',
@@ -166,11 +166,11 @@
                 id: 'chilli',
                 title: 'Chilli Plant',
                 commonName: 'Chilli',
-                latinName: 'Capsicum Annuum',
+                latinName: 'Capsicum frutescens L.',
                 badge: 'Warm soil',
                 color: '#dd1f2f',
                 accent: '#6f9462',
-                summary: 'Tanaman buah pedas yang menyukai tanah subur, sinar matahari penuh, dan kelembapan stabil.',
+                summary: 'A spicy fruit plant that thrives in fertile soil, full sun, and consistent moisture.',
                 lifeCycle: 'Annual',
                 harvestFirst: '2-3 months',
                 harvestNext: '1-2 weeks',
@@ -190,17 +190,17 @@
                 id: 'tomato',
                 title: 'Tomato Plant',
                 commonName: 'Tomato',
-                latinName: 'Solanum Lycopersicum',
+                latinName: 'Solanum lycopersicum L.',
                 badge: 'Balanced nutrients',
                 color: '#e04435',
                 accent: '#4b9d44',
-                summary: 'Tanaman buah sayur yang cocok untuk tanah gembur dengan unsur hara seimbang dan pH mendekati netral.',
+                summary: 'Fruit and vegetable crops that thrive in loose soil with balanced nutrients and a pH close to neutral.',
                 lifeCycle: 'Annual',
                 harvestFirst: '2-4 months',
                 harvestNext: '1-2 weeks',
                 harvestNote: 'Harvest when fruit is fully colored, and support stems with stakes or cages.',
                 season: 'Warm and bright season with steady watering. Avoid long periods of wet leaves.',
-                temperature: '18-30\u00b0C',
+                temperature: '18-27\u00b0C',
                 origin: 'Western South America and Central America.',
                 planting: 'Grows 1-3 meters',
                 potted: 'Grows 0.6-1.5 meters',
@@ -211,17 +211,17 @@
                 icon: 'tomato'
             },
             {
-                id: 'corn',
-                title: 'Corn Plant',
-                commonName: 'Corn',
-                latinName: 'Zea Mays',
-                badge: 'Needs nitrogen',
+                id: 'turmeric',
+                title: 'Turmeric Plant',
+                commonName: 'Turmeric',
+                latinName: 'Curcuma longa L.',
+                badge: 'High in minerals',
                 color: '#f0b52d',
                 accent: '#6f9462',
-                summary: 'Tanaman biji yang tumbuh baik pada lahan terbuka, sinar matahari kuat, dan tambahan nitrogen bertahap.',
-                lifeCycle: 'Annual',
-                harvestFirst: '3-4 months',
-                harvestNext: 'Single main harvest',
+                summary: 'The rhizome is rich in curcumin and minerals and is consumed in small amounts as a spice or an anti-inflammatory supplement.',
+                lifeCycle: 'Perennial',
+                harvestFirst: '7-12 months',
+                harvestNext: '12-18 months',
                 harvestNote: 'Harvest when kernels are full and silks start turning brown.',
                 season: 'Warm season with full sun. Plant in groups to support pollination.',
                 temperature: '18-35\u00b0C',
@@ -230,10 +230,59 @@
                 potted: 'Not ideal, needs deep container',
                 difficulty: 'Low to moderate',
                 careNote: 'Water well during flowering, add nitrogen gradually, and keep weeds controlled.',
+                sunlight: 'Partial Shade',
+                watering: 'Regular, Deep Watering',
+                icon: 'turmeric'
+            },
+			{
+                id: 'basil',
+                title: 'Basil Plant',
+                commonName: 'Basil',
+                latinName: 'Ocimum basilicum',
+                badge: 'Rich in Antioxidants',
+                color: '#f0b52d',
+                accent: '#6f9462',
+                summary: 'Basil is an herb rich in antioxidants and bioactive compounds, used as an aromatic seasoning in cooking.',
+                lifeCycle: 'Annual',
+                harvestFirst: '25-30 days',
+                harvestNext: 'every 2-3 weeks',
+                harvestNote: 'When harvesting, be sure to leave at least 2–3 pairs of leaves near the roots so the plant remains strong enough to grow again.',
+                season: 'Dry Season. Grows very well and quickly because it receives full sunlight all day along',
+                temperature: '18-27\u00b0C',
+                origin: 'Tropical region of Asia and Africa.',
+                planting: 'Grows 60-100 cm',
+                potted: 'Not ideal, needs deep container',
+                difficulty: 'Low to Easy',
+                careNote: 'Basil needs full sun, moist but not soggy soil, warm temperatures, and regular pruning to thrive.',
                 sunlight: 'Full sun',
-                watering: 'High during flowering',
-                icon: 'corn'
-            }
+                watering: 'Regular, Consistent watering',
+                icon: 'basil'
+            },
+			{
+                id: 'onion leaves',
+                title: 'Onion Leaves',
+                commonName: 'Onion Leaves',
+                latinName: 'Allium fistulosum L.',
+                badge: 'High in Antioxidants',
+                color: '#f0b52d',
+                accent: '#6f9462',
+                summary: 'Onion Leaves are rich in antioxidants (especially quercetin), vitamin C, and β-carotene, and are used as an aromatic seasoning or as a fresh side dish.',
+                lifeCycle: 'Perennial',
+                harvestFirst: '2-3 months',
+                harvestNext: '1-2 weeks',
+                harvestNote: 'Regularly trimming the upper parts of the leaves encourages the plant to produce new shoots.',
+                season: 'Rainy to Dry Season. Thrives in moist soil and partial sun to full sun, suitable for both rainy and dry seasons with good drainage.',
+                temperature: '18-27\u00b0C',
+                origin: 'Northwestern China, Asian Region.',
+                planting: 'Grows 20-25 cm',
+                potted: 'Not ideal, needs deep container',
+                difficulty: 'Low to medium',
+                careNote: 'Requires attention to daily care. Needs optimal sunlight and regular watering but must not be overwatered.',
+                sunlight: 'Partial Shade',
+                watering: 'Regular, Consistent watering',
+                icon: 'onion leaves'
+            },
+	        
         ];
 
         const els = {
