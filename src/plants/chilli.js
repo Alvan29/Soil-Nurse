@@ -37,25 +37,40 @@ const PLANT_CHILLI = {
     nutri: {
         n: {
             ideal: '70-80%',
-            desc: 'Nitrogen penting untuk pertumbuhan daun dan batang. Cabai membutuhkan nitrogen sedang-tinggi untuk produksi daun yang sehat.',
-            tips: 'Tambahkan pupuk urea atau kompos kaya nitrogen secara bertahap.',
+            desc: 'Nitrogen (N) sangat penting untuk pertumbuhan daun dan batang cabai. Kekurangan N menyebabkan daun menguning dan pertumbuhan terhambat, sedangkan kelebihan N membuat tanaman terlalu lebat daun namun minim buah.',
+            tips: 'Tambahkan pupuk urea atau kompos kaya nitrogen secara bertahap setiap 2 minggu sejak awal pertumbuhan vegetatif.',
         },
         p: {
             ideal: '60-70%',
-            desc: 'Fosfor mendukung perkembangan akar dan pembungaan. Cabai membutuhkan fosfor cukup untuk hasil buah maksimal.',
-            tips: 'Gunakan pupuk SP-36 atau rock phosphate saat tanam.',
+            desc: 'Fosfor (P) mendukung perkembangan sistem akar yang kuat dan pembungaan lebat. Cabai membutuhkan fosfor yang cukup agar mampu menghasilkan buah secara maksimal sejak musim berbunga pertama.',
+            tips: 'Gunakan pupuk SP-36 atau rock phosphate saat pengolahan lahan. Aplikasikan kembali saat mulai berbunga untuk mendukung pembuahan.',
         },
         k: {
             ideal: '75-85%',
-            desc: 'Kalium meningkatkan ketahanan terhadap penyakit dan kualitas buah. Cabai sangat responsif terhadap kalium.',
-            tips: 'Berikan pupuk KCL atau abu kayu secara teratur.',
+            desc: 'Kalium (K) meningkatkan ketahanan cabai terhadap serangan penyakit, kekeringan, dan meningkatkan kualitas warna serta rasa buah. Kalium juga memperkuat dinding sel tanaman.',
+            tips: 'Berikan pupuk KCl atau abu kayu secara teratur, terutama saat fase pembentukan dan pematangan buah.',
         },
         ph: {
-            ideal: '6.0 - 6.8',
-            desc: 'pH tanah mempengaruhi ketersediaan unsur hara. Cabai tumbuh optimal pada pH agak asam hingga netral.',
-            tips: 'Jika pH terlalu asam, tambahkan kapur dolomit. Jika terlalu basa, tambahkan belerang.',
+            ideal: '5.5 - 6.5',
+            desc: 'pH tanah sangat memengaruhi ketersediaan semua unsur hara. Cabai tumbuh optimal pada pH agak asam hingga netral (6.0–6.8). Di luar rentang ini, beberapa nutrisi menjadi tidak tersedia meski sudah dipupuk.',
+            tips: 'Lakukan uji pH tanah sebelum tanam. Sesuaikan dengan kapur dolomit (jika terlalu asam) atau belerang/sulfur (jika terlalu basa).',
         },
-        
+        ph_kurang: {
+            ideal: 'pH < 6.0 (Terlalu Asam)',
+            desc: 'Ketika pH tanah di bawah 6.0, cabai mengalami keracunan aluminium dan mangan, serta kekurangan kalsium dan magnesium. Daun tampak klorosis (menguning), tepi daun mengering, dan pertumbuhan akar sangat terhambat.',
+            tips: 'Tambahkan kapur dolomit (CaMg(CO₃)₂) sebanyak 1–2 ton/ha dan campurkan hingga kedalaman 20 cm. Biarkan 2–4 minggu sebelum tanam agar pH stabil. Lakukan pengukuran ulang sebelum menanam.',
+        },
+        ph_lebih: {
+            ideal: 'pH > 6.8 (Terlalu Basa)',
+            desc: 'Pada pH di atas 6.8, unsur mikro seperti besi (Fe), mangan (Mn), dan seng (Zn) mengendap sehingga tidak dapat diserap cabai. Gejala yang muncul adalah daun muda menguning dengan tulang daun tetap hijau (klorosis interveinal).',
+            tips: 'Turunkan pH dengan menambahkan belerang elemental (S) atau pupuk amonium sulfat. Pemberian kompos atau bahan organik secara rutin juga membantu menstabilkan pH secara alami dalam jangka panjang.',
+        },
+        unsur_hara: {
+            ideal: 'Unsur Mikro & Makro Seimbang',
+            desc: 'Selain N, P, K, cabai juga membutuhkan kalsium (Ca) untuk mencegah blossom-end rot, magnesium (Mg) untuk pembentukan klorofil, sulfur (S) untuk sintesis protein, serta unsur mikro seperti besi (Fe), seng (Zn), dan boron (B) untuk pembentukan bunga dan buah.',
+            tips: 'Semprotkan pupuk daun mengandung Ca, Mg, dan Zn setiap 2 minggu. Gunakan pupuk NPK lengkap yang sudah mengandung unsur mikro, atau tambahkan pupuk mikro secara terpisah jika gejala kekurangan terlihat.',
+        },
+
         link: 'https://drive.google.com/file/d/1OjtpGt1P2U3Fhd5szKtOj1xcfbJZ4apY/view?usp=drive_link'
     },
 
