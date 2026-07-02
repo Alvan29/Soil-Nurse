@@ -724,7 +724,7 @@
             let html = '';
             scored.forEach(p => {
                 const color = p.color || '#6f9462';
-                html += `<tr data-plant='${JSON.stringify(p)}'>
+                html += `<tr data-plant='${JSON.stringify(p).replace(/'/g, "&apos;")}'>
                     <td>
                         <div class="flex items-center gap-2">
                             <span class="size-4 rounded-full inline-block" style="background:${color}"></span>
