@@ -1,74 +1,74 @@
-// ===================== DATA TANAMAN: MAKRUT LIME LEAVES =====================
-// File ini berisi data deteksi warna (HSV) dan nutrisi untuk tanaman Daun Jeruk Purut.
-// Edit file ini untuk menyesuaikan rentang warna atau nilai nutrisi ideal.
+// ===================== PLANT DATA: MAKRUT LIME LEAVES =====================
+// This file contains color detection data (HSV) and nutrition for Makrut Lime Leaves.
+// Edit this file to adjust the color range or ideal nutrition values.
 
 const PLANT_MAKRUT_LEAVES = {
-    // --- Identitas tanaman ---
+    // --- Plant identity ---
     id: 'makrut_lime_leaves',
     plant: 'Makrut Lime Leaves',
     color: '#4a7c3f',
     icon: 'leaf',
 
-    // --- Rentang HSV untuk deteksi warna indikator strip tes ---
+    // --- HSV ranges for test strip indicator color detection ---
     // Hue: 0-360, Saturation: 0-100, Value: 0-100
     hsvRange: {
-        // N (Nitrogen) - warna biru-ungu tua pada strip
+        // N (Nitrogen) - dark blue-purple color on the strip
         n: { hMin: 215, hMax: 275, sMin: 38, sMax: 100, vMin: 22, vMax: 68 },
-        // P (Fosfor) - warna oranye pada strip
+        // P (Phosphorus) - orange color on the strip
         p: { hMin: 5, hMax: 33, sMin: 48, sMax: 100, vMin: 44, vMax: 90 },
-        // K (Kalium) - warna kuning-oranye pada strip
+        // K (Potassium) - yellow-orange color on the strip
         k: { hMin: 38, hMax: 68, sMin: 42, sMax: 100, vMin: 50, vMax: 94 },
-        // pH - warna hijau (pH ideal jeruk purut ~5.5-6.5)
+        // pH - green color (ideal pH for makrut lime is ~5.5-6.5)
         ph: { hMin: 62, hMax: 140, sMin: 32, sMax: 100, vMin: 38, vMax: 88 }
     },
 
-    // --- Nilai referensi N, P, K (%) dan pH untuk matching ---
+    // --- N, P, K (%) and pH reference values for matching ---
     n: 58,
     p: 52,
     k: 62,
     ph: 6.0,
 
-    // --- Alasan & tips ---
-    reason: 'Daun jeruk purut menyukai tanah subur dengan pH agak asam dan drainase baik.',
+    // --- Reasons & tips ---
+    reason: 'Makrut lime leaves like fertile soil with a slightly acidic pH and good drainage.',
     guide: 'How to grow makrut lime leaves?',
-    tips: 'Tanam di lokasi yang mendapat sinar matahari penuh, pastikan drainase pot atau lahan sangat baik, dan lakukan pemangkasan ringan setelah panen untuk merangsang pertumbuhan tunas baru.',
+    tips: 'Plant in a location that receives full sun, ensure pot or land drainage is very good, and do light pruning after harvest to stimulate new shoot growth.',
 
-    // --- Detail nutrisi (untuk modal nutrisi) ---
+    // --- Nutrition details (for nutrition modal) ---
     nutri: {
         n: {
             ideal: '55-65%',
-            desc: 'Nitrogen (N) sangat dibutuhkan untuk pertumbuhan daun jeruk purut yang lebat dan hijau mengkilap. Kekurangan nitrogen menyebabkan daun menguning (klorosis), rontok lebih cepat, dan produksi daun menurun drastis. Kelebihan N membuat tanaman rentan serangan kutu dan jamur.',
-            tips: 'Berikan pupuk NPK seimbang setiap bulan selama musim tumbuh. Tambahkan kompos organik sebagai mulsa di sekeliling batang untuk melepas nitrogen secara lambat. Hindari pemupukan nitrogen tinggi menjelang musim kering.',
+            desc: 'Nitrogen (N) is highly needed for the growth of dense and shiny green makrut lime leaves. Nitrogen deficiency causes yellowing of leaves (chlorosis), faster leaf drop, and a drastic decrease in leaf production. Excess N makes the plant susceptible to aphids and fungal attacks.',
+            tips: 'Apply a balanced NPK fertilizer every month during the growing season. Add organic compost as mulch around the stem to release nitrogen slowly. Avoid high nitrogen fertilization before the dry season.',
         },
         p: {
             ideal: '48-58%',
-            desc: 'Fosfor (P) mendukung perkembangan sistem perakaran yang dalam dan luas pada jeruk purut, yang krusial untuk penyerapan air dan nutrisi di musim kemarau. Fosfor juga berperan dalam pembentukan tunas dan pemulihan tanaman setelah pemangkasan.',
-            tips: 'Campurkan pupuk fosfat (SP-36 atau TSP) ke lubang tanam. Untuk perawatan rutin, siram dengan larutan pupuk fosfat cair setiap 6–8 minggu. Pastikan pH tanah ideal agar fosfor dapat diserap dengan optimal.',
+            desc: 'Phosphorus (P) supports the development of a deep and extensive root system in makrut lime, which is crucial for water and nutrient absorption in the dry season. Phosphorus also plays a role in shoot formation and plant recovery after pruning.',
+            tips: 'Mix phosphate fertilizer (SP-36 or TSP) into the planting hole. For routine care, water with liquid phosphate fertilizer solution every 6-8 weeks. Ensure ideal soil pH so phosphorus can be absorbed optimally.',
         },
         k: {
             ideal: '58-68%',
-            desc: 'Kalium (K) memperkuat ketahanan pohon jeruk purut terhadap kekeringan, hama, dan penyakit jamur. Kalium juga meningkatkan kualitas aroma daun dengan mendukung produksi minyak atsiri. Kekurangan K menyebabkan tepi daun menguning dan mengering.',
-            tips: 'Berikan pupuk kalium sulfat (K₂SO₄) setiap 2 bulan. Untuk tanaman pot, gunakan pupuk slow-release mengandung kalium agar ketersediaan nutrisi lebih konsisten. Abu sekam atau abu kayu juga merupakan sumber kalium organik yang baik.',
+            desc: 'Potassium (K) strengthens makrut lime tree resistance to drought, pests, and fungal diseases. Potassium also improves leaf aroma quality by supporting essential oil production. K deficiency causes leaf edges to yellow and dry out.',
+            tips: 'Apply potassium sulfate (K₂SO₄) fertilizer every 2 months. For potted plants, use slow-release fertilizer containing potassium so nutrient availability is more consistent. Rice husk ash or wood ash is also a good source of organic potassium.',
         },
         ph: {
             ideal: '5.5 - 6.5',
-            desc: 'Jeruk purut tumbuh optimal pada tanah agak asam hingga netral (5.5–6.5). pH di bawah 5.5 menyebabkan toksisitas mangan dan defisiensi kalsium, sedangkan pH di atas 6.5 menghambat penyerapan besi dan seng yang penting untuk sintesis klorofil.',
-            tips: 'Uji pH tanah sebelum tanam dan setiap 3 bulan sekali. Tambahkan kapur dolomit jika pH terlalu asam, atau belerang jika terlalu basa. Pemberian kompos matang secara rutin membantu menjaga kestabilan pH dalam jangka panjang.',
+            desc: 'Makrut lime grows optimally in slightly acidic to neutral soil (5.5-6.5). A pH below 5.5 causes manganese toxicity and calcium deficiency, while a pH above 6.5 inhibits the absorption of iron and zinc which are important for chlorophyll synthesis.',
+            tips: 'Test soil pH before planting and every 3 months. Add dolomite lime if the pH is too acidic, or sulfur if it is too alkaline. Regular application of mature compost helps maintain pH stability in the long term.',
         },
         ph_kurang: {
-            ideal: 'pH < 5.5 (Terlalu Asam)',
-            desc: 'Pada pH di bawah 5.5, jeruk purut mengalami keracunan aluminium dan mangan yang merusak ujung-ujung akar muda. Akibatnya, tanaman tidak mampu menyerap kalsium dan magnesium dengan baik. Gejala yang muncul adalah daun menggulung, tepi daun cokelat, dan pertumbuhan yang sangat lambat.',
-            tips: 'Aplikasikan kapur dolomit (CaMg(CO₃)₂) sebanyak 0.5–1 kg per pohon, campur rata dengan tanah di sekitar perakaran. Lakukan 4–6 minggu sebelum musim tanam. Hindari penggunaan pupuk dengan reaksi asam seperti amonium sulfat selama proses pengapuran.',
+            ideal: 'pH < 5.5 (Too Acidic)',
+            desc: 'At a pH below 5.5, makrut lime experiences aluminum and manganese toxicity which damages young root tips. As a result, the plant cannot absorb calcium and magnesium properly. Symptoms that appear are curling leaves, brown leaf edges, and very slow growth.',
+            tips: 'Apply dolomite lime (CaMg(CO₃)₂) at 0.5-1 kg per tree, mix evenly with soil around the roots. Do this 4-6 weeks before the planting season. Avoid using fertilizers with acidic reactions like ammonium sulfate during the liming process.',
         },
         ph_lebih: {
-            ideal: 'pH > 6.5 (Terlalu Basa)',
-            desc: 'Tanah basa mengendapkan besi (Fe) dan seng (Zn) sehingga tidak dapat diserap oleh jeruk purut. Gejala khas adalah klorosis interveinal pada daun muda — daun menguning dengan tulang daun tetap hijau. Lama-kelamaan daun rontok dan pohon melemah secara keseluruhan.',
-            tips: 'Turunkan pH dengan belerang (sulfur) granular atau pupuk amonium sulfat. Semprotkan larutan besi kelat (Fe-EDTA) atau pupuk mikro pada daun sebagai solusi cepat mengatasi klorosis. Siram dengan air yang mengandung asam humat untuk membantu melarutkan mineral yang mengendap.',
+            ideal: 'pH > 6.5 (Too Alkaline)',
+            desc: 'Alkaline soil precipitates iron (Fe) and zinc (Zn) so they cannot be absorbed by makrut lime. A classic symptom is interveinal chlorosis on young leaves — leaves yellow with veins remaining green. Over time, leaves fall off and the tree weakens overall.',
+            tips: 'Lower the pH with granular sulfur or ammonium sulfate fertilizer. Spray iron chelate (Fe-EDTA) solution or micro fertilizer on leaves as a quick solution to overcome chlorosis. Water with water containing humic acid to help dissolve precipitated minerals.',
         },
         unsur_hara: {
-            ideal: 'Unsur Mikro untuk Aroma & Produksi Daun',
-            desc: 'Jeruk purut membutuhkan magnesium (Mg) dalam jumlah tinggi untuk mempertahankan warna hijau daun yang pekat dan produksi klorofil. Seng (Zn) berperan dalam pembentukan hormon pertumbuhan daun, sedangkan besi (Fe) diperlukan untuk respirasi sel. Kekurangan unsur mikro ini menyebabkan daun kecil, pucat, dan tidak beraroma.',
-            tips: 'Semprotkan pupuk daun mengandung Mg, Fe, dan Zn setiap 3 minggu selama musim tumbuh aktif. Siram dengan larutan magnesium sulfat (MgSO₄ atau garam epsom, 10 gram/liter) setiap bulan untuk memastikan kecukupan magnesium, terutama jika daun mulai menguning.',
+            ideal: 'Micro Nutrients for Aroma & Leaf Production',
+            desc: 'Makrut lime requires high amounts of magnesium (Mg) to maintain deep green leaf color and chlorophyll production. Zinc (Zn) plays a role in leaf growth hormone formation, while iron (Fe) is needed for cellular respiration. Deficiency of these micro nutrients causes small, pale, and odorless leaves.',
+            tips: 'Spray foliar fertilizer containing Mg, Fe, and Zn every 3 weeks during the active growing season. Water with magnesium sulfate solution (MgSO₄ or epsom salt, 10 grams/liter) every month to ensure sufficient magnesium, especially if leaves start to yellow.',
         },
 
         link: 'https://drive.google.com/file/d/1V2aol9nhyl8BmvrVWsVyTALel3RH2nEu/view?usp=drive_link'

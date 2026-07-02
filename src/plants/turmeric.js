@@ -1,74 +1,74 @@
-// ===================== DATA TANAMAN: TURMERIC =====================
-// File ini berisi data deteksi warna (HSV) dan nutrisi untuk tanaman Kunyit.
-// Edit file ini untuk menyesuaikan rentang warna atau nilai nutrisi ideal.
+// ===================== PLANT DATA: TURMERIC =====================
+// This file contains color detection data (HSV) and nutrition for Turmeric plants.
+// Edit this file to adjust the color range or ideal nutrition values.
 
 const PLANT_TURMERIC = {
-    // --- Identitas tanaman ---
+    // --- Plant identity ---
     id: 'turmeric',
     plant: 'Turmeric',
     color: '#e8a020',
     icon: 'corn',
 
-    // --- Rentang HSV untuk deteksi warna indikator strip tes ---
+    // --- HSV ranges for test strip indicator color detection ---
     // Hue: 0-360, Saturation: 0-100, Value: 0-100
     hsvRange: {
-        // N (Nitrogen) - warna biru-ungu gelap pada strip
+        // N (Nitrogen) - dark blue-purple color on the strip
         n: { hMin: 210, hMax: 272, sMin: 35, sMax: 100, vMin: 20, vMax: 68 },
-        // P (Fosfor) - warna oranye pada strip
+        // P (Phosphorus) - orange color on the strip
         p: { hMin: 8, hMax: 35, sMin: 48, sMax: 100, vMin: 42, vMax: 88 },
-        // K (Kalium) - warna kuning-oranye pada strip (kunyit butuh K tinggi)
+        // K (Potassium) - yellow-orange color on the strip (turmeric needs high K)
         k: { hMin: 35, hMax: 65, sMin: 45, sMax: 100, vMin: 52, vMax: 96 },
-        // pH - warna hijau-kuning (pH ideal kunyit ~5.5-7.0)
+        // pH - green-yellow color (ideal pH for turmeric is ~5.5-7.0)
         ph: { hMin: 58, hMax: 148, sMin: 25, sMax: 100, vMin: 38, vMax: 90 }
     },
 
-    // --- Nilai referensi N, P, K (%) dan pH untuk matching ---
+    // --- N, P, K (%) and pH reference values for matching ---
     n: 55,
     p: 60,
     k: 72,
     ph: 6.2,
 
-    // --- Alasan & tips ---
-    reason: 'Kunyit tumbuh baik pada tanah gembur dengan kalium tinggi, fosfor cukup, dan pH agak asam.',
+    // --- Reasons & tips ---
+    reason: 'Turmeric grows well in loose soil with high potassium, sufficient phosphorus, and a slightly acidic pH.',
     guide: 'How to grow turmeric?',
-    tips: 'Tanam rimpang kunyit sedalam 5–7 cm dengan posisi tunas menghadap atas. Jaga kelembapan tanah tetap konsisten, beri mulsa organik tebal untuk menjaga suhu tanah, dan hindari genangan air agar rimpang tidak membusuk.',
+    tips: 'Plant turmeric rhizomes 5-7 cm deep with the shoots facing upwards. Keep soil moisture consistent, provide thick organic mulch to maintain soil temperature, and avoid waterlogging so rhizomes do not rot.',
 
-    // --- Detail nutrisi (untuk modal nutrisi) ---
+    // --- Nutrition details (for nutrition modal) ---
     nutri: {
         n: {
             ideal: '50-60%',
-            desc: 'Nitrogen (N) mendukung pertumbuhan daun dan batang semu kunyit yang lebat, yang penting untuk fotosintesis dan pengisian rimpang. Meski kebutuhan N kunyit tidak setinggi tanaman daun, kekurangan N menyebabkan daun menguning dan pembentukan rimpang terhambat.',
-            tips: 'Berikan pupuk urea atau pupuk kandang sapi yang sudah matang setiap 4–6 minggu sekali. Kurangi pemberian nitrogen menjelang masa pembentukan rimpang (3–4 bulan setelah tanam) agar energi tanaman dialihkan ke perkembangan rimpang, bukan daun.',
+            desc: 'Nitrogen (N) supports the growth of dense turmeric leaves and pseudostems, which is important for photosynthesis and rhizome filling. Although turmeric\'s N requirement is not as high as leafy plants, N deficiency causes leaf yellowing and stunted rhizome formation.',
+            tips: 'Apply urea fertilizer or mature cow manure every 4-6 weeks. Reduce nitrogen application towards the rhizome formation period (3-4 months after planting) so plant energy is diverted to rhizome development, not leaves.',
         },
         p: {
             ideal: '55-65%',
-            desc: 'Fosfor (P) sangat krusial untuk pembentukan dan pembesaran rimpang kunyit. Fosfor mendukung pembelahan sel yang aktif di dalam rimpang sehingga rimpang tumbuh besar, padat, dan mengandung kurkumin tinggi. Kekurangan fosfor menyebabkan rimpang kerdil dan pucat.',
-            tips: 'Campurkan pupuk TSP (Triple Super Phosphate) atau tepung tulang ke lubang tanam sebagai pupuk dasar. Lakukan pemupukan fosfat susulan setiap 2 bulan dengan pupuk SP-36 encer yang disiramkan di sekitar zona perakaran.',
+            desc: 'Phosphorus (P) is very crucial for the formation and enlargement of turmeric rhizomes. Phosphorus supports active cell division in the rhizome so it grows large, dense, and contains high curcumin. Phosphorus deficiency causes stunted and pale rhizomes.',
+            tips: 'Mix TSP (Triple Super Phosphate) fertilizer or bone meal into the planting hole as basal fertilizer. Perform supplementary phosphate fertilization every 2 months with dilute SP-36 fertilizer watered around the root zone.',
         },
         k: {
             ideal: '68-80%',
-            desc: 'Kalium (K) adalah nutrisi paling penting untuk produksi rimpang kunyit yang berkualitas tinggi. Kalium mendukung translokasi karbohidrat dari daun ke rimpang, meningkatkan kadar kurkumin, dan memperkuat ketahanan terhadap penyakit layu Fusarium yang sering menyerang kunyit.',
-            tips: 'Berikan pupuk kalium sulfat (K₂SO₄) atau pupuk KCl setiap 6–8 minggu. Tingkatkan dosis kalium saat memasuki fase pembentukan rimpang (mulai bulan ke-3). Abu sekam padi atau abu kayu juga merupakan sumber kalium organik yang sangat baik untuk kunyit.',
+            desc: 'Potassium (K) is the most important nutrient for the production of high-quality turmeric rhizomes. Potassium supports carbohydrate translocation from leaves to rhizomes, increases curcumin levels, and strengthens resistance to Fusarium wilt which often attacks turmeric.',
+            tips: 'Apply potassium sulfate (K₂SO₄) or KCl fertilizer every 6-8 weeks. Increase the potassium dose when entering the rhizome formation phase (starting from the 3rd month). Rice husk ash or wood ash is also an excellent source of organic potassium for turmeric.',
         },
         ph: {
             ideal: '5.5 - 6.5',
-            desc: 'Kunyit toleran terhadap rentang pH yang cukup lebar (5.5–7.0), namun tumbuh paling optimal pada pH agak asam (5.5–6.5). Pada kondisi ini, fosfor, kalium, dan unsur mikro tersedia dengan baik untuk mendukung perkembangan rimpang. pH di luar rentang ini dapat menghambat penyerapan nutrisi secara signifikan.',
-            tips: 'Lakukan pengujian pH tanah sebelum tanam. Tambahkan kompos matang sebanyak 2–3 kg per m² untuk menjaga pH tanah stabil sekaligus meningkatkan kesuburan. Untuk lahan masam, gunakan kapur dolomit secara bertahap.',
+            desc: 'Turmeric is tolerant to a fairly wide pH range (5.5-7.0), but grows most optimally at a slightly acidic pH (5.5-6.5). Under these conditions, phosphorus, potassium, and micro nutrients are well available to support rhizome development. A pH outside this range can significantly inhibit nutrient absorption.',
+            tips: 'Perform soil pH testing before planting. Add mature compost at 2-3 kg per m² to keep soil pH stable while improving fertility. For acidic land, use dolomite lime gradually.',
         },
         ph_kurang: {
-            ideal: 'pH < 5.5 (Terlalu Asam)',
-            desc: 'Pada pH di bawah 5.5, kunyit mengalami toksisitas aluminium (Al³⁺) yang merusak ujung akar dan menghambat pembentukan rimpang. Kalsium dan magnesium menjadi langka, sehingga rimpang yang terbentuk menjadi kecil, berserat kasar, dan kandungan kurkuminnya rendah.',
-            tips: 'Aplikasikan kapur dolomit atau kapur pertanian sebanyak 1–2 ton/ha pada lahan, atau 0.5 kg per lubang tanam untuk skala kecil. Campurkan rata dengan tanah dan biarkan 3–4 minggu sebelum tanam. Tambahkan bokashi atau pupuk organik untuk mempercepat stabilisasi pH.',
+            ideal: 'pH < 5.5 (Too Acidic)',
+            desc: 'At a pH below 5.5, turmeric experiences aluminum (Al³⁺) toxicity which damages root tips and inhibits rhizome formation. Calcium and magnesium become scarce, so the formed rhizomes are small, coarse-fibered, and have low curcumin content.',
+            tips: 'Apply dolomite lime or agricultural lime at 1-2 tons/ha on the land, or 0.5 kg per planting hole for small scale. Mix evenly with the soil and leave for 3-4 weeks before planting. Add bokashi or organic fertilizer to speed up pH stabilization.',
         },
         ph_lebih: {
-            ideal: 'pH > 7.0 (Terlalu Basa)',
-            desc: 'Pada pH di atas 7.0, fosfor bereaksi dengan kalsium dan menjadi tidak tersedia bagi kunyit, padahal fosfor sangat dibutuhkan untuk pembesaran rimpang. Unsur mikro seperti besi (Fe) dan mangan (Mn) juga mengendap. Akibatnya, rimpang tumbuh lambat, berwarna pucat, dan mudah terserang penyakit.',
-            tips: 'Turunkan pH secara bertahap dengan belerang (sulfur) granular atau pupuk ferrous sulfat. Semprot tanah dengan larutan asam humat untuk membantu mengurai senyawa yang mengikat fosfor. Gunakan mulsa organik tebal untuk membantu menurunkan pH permukaan tanah secara alami.',
+            ideal: 'pH > 7.0 (Too Alkaline)',
+            desc: 'At a pH above 7.0, phosphorus reacts with calcium and becomes unavailable to turmeric, even though phosphorus is highly needed for rhizome enlargement. Micro nutrients like iron (Fe) and manganese (Mn) also precipitate. As a result, rhizomes grow slowly, are pale-colored, and are easily attacked by diseases.',
+            tips: 'Lower the pH gradually with granular sulfur or ferrous sulfate fertilizer. Spray the soil with humic acid solution to help break down compounds that bind phosphorus. Use thick organic mulch to help lower the surface soil pH naturally.',
         },
         unsur_hara: {
-            ideal: 'Kalium & Boron untuk Kualitas Rimpang',
-            desc: 'Selain N, P, K, kunyit sangat membutuhkan boron (B) untuk memastikan translokasi gula dan karbohidrat ke rimpang berjalan lancar, yang langsung memengaruhi ukuran dan kandungan kurkumin rimpang. Kalsium (Ca) dibutuhkan untuk kekuatan dinding sel rimpang, magnesium (Mg) untuk klorofil, dan seng (Zn) untuk regulasi hormon pertumbuhan.',
-            tips: 'Semprotkan larutan boraks (sodium boraks, 1–2 gram/liter) setiap 4–6 minggu untuk memenuhi kebutuhan boron. Gunakan pupuk NPK lengkap yang sudah mengandung unsur mikro (Ca, Mg, Fe, Zn, B) sebagai pemupukan rutin. Penambahan vermikompos juga sangat efektif untuk menyediakan unsur hara lengkap secara bertahap.',
+            ideal: 'Potassium & Boron for Rhizome Quality',
+            desc: 'Besides N, P, and K, turmeric highly needs boron (B) to ensure smooth translocation of sugar and carbohydrates to the rhizome, which directly affects rhizome size and curcumin content. Calcium (Ca) is needed for rhizome cell wall strength, magnesium (Mg) for chlorophyll, and zinc (Zn) for growth hormone regulation.',
+            tips: 'Spray borax solution (sodium borate, 1-2 grams/liter) every 4-6 weeks to meet boron needs. Use a complete NPK fertilizer that already contains micro nutrients (Ca, Mg, Fe, Zn, B) for routine fertilization. The addition of vermicompost is also highly effective to provide complete nutrients gradually.',
         },
 
         link: 'https://drive.google.com/file/d/1rURQOB9awwi8IDHuhe1IJka4IDseDjsA/view?usp=drive_link'

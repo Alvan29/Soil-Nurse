@@ -1,74 +1,74 @@
-// ===================== DATA TANAMAN: BASIL =====================
-// File ini berisi data deteksi warna (HSV) dan nutrisi untuk tanaman Kemangi.
-// Edit file ini untuk menyesuaikan rentang warna atau nilai nutrisi ideal.
+// ===================== PLANT DATA: BASIL =====================
+// This file contains color detection data (HSV) and nutrition for Basil plants.
+// Edit this file to adjust the color range or ideal nutrition values.
 
 const PLANT_BASIL = {
-    // --- Identitas tanaman ---
+    // --- Plant identity ---
     id: 'basil',
     plant: 'Basil',
     color: '#3a9c4e',
     icon: 'leaf',
 
-    // --- Rentang HSV untuk deteksi warna indikator strip tes ---
+    // --- HSV ranges for test strip indicator color detection ---
     // Hue: 0-360, Saturation: 0-100, Value: 0-100
     hsvRange: {
-        // N (Nitrogen) - warna biru-ungu pada strip (kemangi butuh N sedang-tinggi)
+        // N (Nitrogen) - blue-purple color on the strip (basil needs medium-high N)
         n: { hMin: 200, hMax: 270, sMin: 35, sMax: 100, vMin: 25, vMax: 72 },
-        // P (Fosfor) - warna oranye-merah pada strip
+        // P (Phosphorus) - orange-red color on the strip
         p: { hMin: 0, hMax: 32, sMin: 45, sMax: 100, vMin: 42, vMax: 88 },
-        // K (Kalium) - warna kuning pada strip
+        // K (Potassium) - yellow color on the strip
         k: { hMin: 42, hMax: 72, sMin: 38, sMax: 100, vMin: 48, vMax: 93 },
-        // pH - warna hijau (pH ideal kemangi ~6.0-7.0)
+        // pH - green color (ideal pH for basil is ~6.0-7.0)
         ph: { hMin: 65, hMax: 148, sMin: 28, sMax: 100, vMin: 38, vMax: 90 }
     },
 
-    // --- Nilai referensi N, P, K (%) dan pH untuk matching ---
+    // --- N, P, K (%) and pH reference values for matching ---
     n: 65,
     p: 55,
     k: 60,
     ph: 6.5,
 
-    // --- Alasan & tips ---
-    reason: 'Kemangi tumbuh baik pada tanah subur dengan nitrogen cukup dan pH mendekati netral.',
+    // --- Reasons & tips ---
+    reason: 'Basil grows well in fertile soil with sufficient nitrogen and a pH close to neutral.',
     guide: 'How to plant basil?',
-    tips: 'Tanam di tempat yang mendapat sinar matahari 6–8 jam per hari, siram secara teratur tapi jangan sampai tergenang, dan pangkas bunga sesegera mungkin agar daun terus tumbuh lebat.',
+    tips: 'Plant in an area that gets 6-8 hours of sunlight per day, water regularly but avoid waterlogging, and prune flowers as soon as possible so leaves continue to grow densely.',
 
-    // --- Detail nutrisi (untuk modal nutrisi) ---
+    // --- Nutrition details (for nutrition modal) ---
     nutri: {
         n: {
             ideal: '60-70%',
-            desc: 'Nitrogen (N) adalah nutrisi paling krusial untuk kemangi karena bagian yang dipanen adalah daunnya. N mendukung pertumbuhan daun yang lebar, hijau pekat, dan beraroma kuat. Kekurangan N menyebabkan daun pucat, kecil, dan tidak beraroma.',
-            tips: 'Pupuk dengan kompos cair atau pupuk kandang setiap 2–3 minggu. Jika menggunakan pupuk kimia, pilih urea encer (1–2 gram/liter) dan siramkan ke media tanam, bukan ke daun.',
+            desc: 'Nitrogen (N) is the most crucial nutrient for basil because the harvested part is the leaves. N supports the growth of broad, deep green, and strongly scented leaves. Nitrogen deficiency causes pale, small, and odorless leaves.',
+            tips: 'Fertilize with liquid compost or manure every 2-3 weeks. If using chemical fertilizer, choose diluted urea (1-2 grams/liter) and apply it to the growing medium, not the leaves.',
         },
         p: {
             ideal: '50-60%',
-            desc: 'Fosfor (P) mendukung perkembangan akar kemangi yang kuat dan pembentukan akar lateral yang banyak. Akar yang sehat memungkinkan tanaman menyerap air dan nutrisi lebih efisien, terutama di musim kemarau.',
-            tips: 'Campurkan pupuk fosfat alami (rock phosphate) ke media tanam saat persiapan. Untuk tanaman pot, gunakan pupuk slow-release mengandung fosfor agar nutrisi tersedia secara bertahap.',
+            desc: 'Phosphorus (P) supports the development of strong basil roots and the formation of many lateral roots. Healthy roots allow the plant to absorb water and nutrients more efficiently, especially during the dry season.',
+            tips: 'Mix natural phosphate fertilizer (rock phosphate) into the growing medium during preparation. For potted plants, use slow-release fertilizer containing phosphorus so nutrients are available gradually.',
         },
         k: {
             ideal: '55-65%',
-            desc: 'Kalium (K) meningkatkan produksi minyak esensial dalam daun kemangi yang bertanggung jawab atas aroma khasnya. Selain itu, kalium memperkuat ketahanan tanaman terhadap penyakit layu dan kondisi stres lingkungan.',
-            tips: 'Gunakan abu sekam padi atau pupuk kalium sulfat sebagai sumber kalium alami. Hindari pemberian kalium berlebihan karena dapat menghambat penyerapan magnesium dan kalsium.',
+            desc: 'Potassium (K) increases the production of essential oils in basil leaves responsible for its distinct aroma. Additionally, potassium strengthens the plant\'s resistance to wilt disease and environmental stress conditions.',
+            tips: 'Use rice husk ash or potassium sulfate fertilizer as a natural source of potassium. Avoid excessive potassium application as it can inhibit the absorption of magnesium and calcium.',
         },
         ph: {
             ideal: '6.0 - 7.5',
-            desc: 'Kemangi toleran terhadap rentang pH yang cukup lebar (6.0–7.0). Pada kondisi ini, semua unsur hara tersedia dengan baik. pH di bawah 6.0 menyebabkan kekurangan kalsium dan magnesium, sedangkan pH di atas 7.0 menghambat penyerapan zat besi dan mangan.',
-            tips: 'Campurkan kompos matang atau vermikompos ke tanah untuk menjaga pH tetap stabil di kisaran ideal. Lakukan tes pH tanah setiap 2–3 bulan sekali.',
+            desc: 'Basil is tolerant to a fairly wide pH range (6.0-7.0). Under these conditions, all nutrients are well available. A pH below 6.0 causes calcium and magnesium deficiency, while a pH above 7.0 inhibits the absorption of iron and manganese.',
+            tips: 'Mix mature compost or vermicompost into the soil to keep the pH stable in the ideal range. Perform a soil pH test every 2-3 months.',
         },
         ph_kurang: {
-            ideal: 'pH < 6.0 (Terlalu Asam)',
-            desc: 'Pada pH terlalu asam, kemangi mengalami toksisitas aluminium yang merusak ujung akar, serta kekurangan kalsium dan magnesium. Gejala yang terlihat adalah daun mengecil, tepi daun kecokelatan, dan tanaman tumbuh kerdil meski sudah dipupuk.',
-            tips: 'Tambahkan kapur pertanian (CaCO₃) atau kapur dolomit secara bertahap ke media tanam dan aduk rata. Untuk pot, ganti sebagian media dengan campuran yang mengandung kompos matang untuk menaikkan pH secara organik.',
+            ideal: 'pH < 6.0 (Too Acidic)',
+            desc: 'At a pH that is too acidic, basil experiences aluminum toxicity which damages the root tips, as well as calcium and magnesium deficiency. Visible symptoms include smaller leaves, browning leaf edges, and stunted growth even after fertilization.',
+            tips: 'Gradually add agricultural lime (CaCO₃) or dolomite lime to the growing medium and mix well. For pots, replace some of the medium with a mixture containing mature compost to raise the pH organically.',
         },
         ph_lebih: {
-            ideal: 'pH > 7.0 (Terlalu Basa)',
-            desc: 'Tanah basa mengunci zat besi (Fe) dan mangan (Mn) sehingga tidak dapat diserap kemangi. Daun muda tampak menguning dengan tulang daun yang tetap hijau (klorosis interveinal). Pertumbuhan melambat dan tanaman mudah stres saat cuaca panas.',
-            tips: 'Turunkan pH dengan menambahkan belerang (sulfur) granular ke tanah atau siram dengan larutan cuka encer (pH cuka disesuaikan). Gunakan pupuk berbasis amonium sulfat yang bersifat asam untuk pemupukan rutin.',
+            ideal: 'pH > 7.0 (Too Alkaline)',
+            desc: 'Alkaline soil locks up iron (Fe) and manganese (Mn) so they cannot be absorbed by basil. Young leaves appear yellowed with veins remaining green (interveinal chlorosis). Growth slows down and the plant is easily stressed during hot weather.',
+            tips: 'Lower the pH by adding granular sulfur to the soil or watering with a dilute vinegar solution (adjust the vinegar pH). Use ammonium sulfate-based fertilizers which are acidic for routine fertilization.',
         },
         unsur_hara: {
-            ideal: 'Unsur Mikro untuk Aroma & Kesehatan Daun',
-            desc: 'Selain N, P, K, kemangi memerlukan magnesium (Mg) untuk pembentukan klorofil agar daun tetap hijau pekat, kalsium (Ca) untuk kekuatan dinding sel, besi (Fe) untuk respirasi sel, serta seng (Zn) yang berperan dalam sintesis klorofil dan hormon pertumbuhan.',
-            tips: 'Semprotkan pupuk daun lengkap mengandung Mg, Fe, dan Zn setiap 2 minggu sekali. Gunakan media tanam berbasis kompos yang kaya akan unsur mikro alami untuk mendukung pertumbuhan daun yang sehat dan beraroma.',
+            ideal: 'Micro Nutrients for Aroma & Leaf Health',
+            desc: 'Besides N, P, and K, basil requires magnesium (Mg) for chlorophyll formation to keep leaves deep green, calcium (Ca) for cell wall strength, iron (Fe) for cellular respiration, and zinc (Zn) which plays a role in chlorophyll synthesis and growth hormones.',
+            tips: 'Spray a complete foliar fertilizer containing Mg, Fe, and Zn every 2 weeks. Use a compost-based growing medium rich in natural micro nutrients to support the growth of healthy and aromatic leaves.',
         },
 
         link: 'https://drive.google.com/file/d/1r8dPMJuFrj-RlDXxX-JGAxzQzwaRG3YD/view?usp=drive_link'

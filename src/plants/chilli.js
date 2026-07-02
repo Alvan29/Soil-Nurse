@@ -1,74 +1,74 @@
-// ===================== DATA TANAMAN: CHILLI =====================
-// File ini berisi data deteksi warna (HSV) dan nutrisi untuk tanaman Cabai.
-// Edit file ini untuk menyesuaikan rentang warna atau nilai nutrisi ideal.
+// ===================== PLANT DATA: CHILLI =====================
+// This file contains color detection data (HSV) and nutrition for Chilli plants.
+// Edit this file to adjust the color range or ideal nutrition values.
 
 const PLANT_CHILLI = {
-    // --- Identitas tanaman ---
+    // --- Plant identity ---
     id: 'chilli',
     plant: 'Chilli',
     color: '#dd1f2f',
     icon: 'chilli',
 
-    // --- Rentang HSV untuk deteksi warna indikator strip tes ---
+    // --- HSV ranges for test strip indicator color detection ---
     // Hue: 0-360, Saturation: 0-100, Value: 0-100
     hsvRange: {
-        // N (Nitrogen) - warna biru/ungu gelap pada strip
+        // N (Nitrogen) - dark blue/purple color on the strip
         n: { hMin: 220, hMax: 280, sMin: 40, sMax: 100, vMin: 20, vMax: 70 },
-        // P (Fosfor) - warna oranye/merah pada strip
+        // P (Phosphorus) - orange/red color on the strip
         p: { hMin: 0, hMax: 30, sMin: 50, sMax: 100, vMin: 40, vMax: 90 },
-        // K (Kalium) - warna kuning pada strip
+        // K (Potassium) - yellow color on the strip
         k: { hMin: 40, hMax: 70, sMin: 40, sMax: 100, vMin: 50, vMax: 95 },
-        // pH - warna hijau/kuning (pH ideal cabai ~6.0-6.8)
+        // pH - green/yellow color (ideal pH for chilli is ~6.0-6.8)
         ph: { hMin: 60, hMax: 140, sMin: 30, sMax: 100, vMin: 40, vMax: 90 }
     },
 
-    // --- Nilai referensi N, P, K (%) dan pH untuk matching ---
+    // --- N, P, K (%) and pH reference values for matching ---
     n: 72,
     p: 66,
     k: 81,
     ph: 6.4,
 
-    // --- Alasan & tips ---
-    reason: 'NPK cukup tinggi dan pH sedikit asam, cocok untuk cabai yang butuh tanah subur.',
+    // --- Reasons & tips ---
+    reason: 'Fairly high NPK and slightly acidic pH, suitable for chilli which requires fertile soil.',
     guide: 'How to plant chilli?',
-    tips: 'Tanam di area penuh matahari, beri kompos matang, siram teratur, dan tambahkan mulsa agar tanah stabil.',
+    tips: 'Plant in an area with full sun, provide mature compost, water regularly, and add mulch to stabilize the soil.',
 
-    // --- Detail nutrisi (untuk modal nutrisi) ---
+    // --- Nutrition details (for nutrition modal) ---
     nutri: {
         n: {
             ideal: '70-80%',
-            desc: 'Nitrogen (N) sangat penting untuk pertumbuhan daun dan batang cabai. Kekurangan N menyebabkan daun menguning dan pertumbuhan terhambat, sedangkan kelebihan N membuat tanaman terlalu lebat daun namun minim buah.',
-            tips: 'Tambahkan pupuk urea atau kompos kaya nitrogen secara bertahap setiap 2 minggu sejak awal pertumbuhan vegetatif.',
+            desc: 'Nitrogen (N) is very important for the growth of chilli leaves and stems. Nitrogen deficiency causes leaves to yellow and growth to be stunted, while excess N makes the plant too leafy but with minimal fruit.',
+            tips: 'Add urea fertilizer or nitrogen-rich compost gradually every 2 weeks starting from early vegetative growth.',
         },
         p: {
             ideal: '60-70%',
-            desc: 'Fosfor (P) mendukung perkembangan sistem akar yang kuat dan pembungaan lebat. Cabai membutuhkan fosfor yang cukup agar mampu menghasilkan buah secara maksimal sejak musim berbunga pertama.',
-            tips: 'Gunakan pupuk SP-36 atau rock phosphate saat pengolahan lahan. Aplikasikan kembali saat mulai berbunga untuk mendukung pembuahan.',
+            desc: 'Phosphorus (P) supports the development of a strong root system and heavy flowering. Chilli needs sufficient phosphorus to be able to produce fruit optimally from the first flowering season.',
+            tips: 'Use SP-36 fertilizer or rock phosphate during land preparation. Reapply when flowering begins to support fruiting.',
         },
         k: {
             ideal: '75-85%',
-            desc: 'Kalium (K) meningkatkan ketahanan cabai terhadap serangan penyakit, kekeringan, dan meningkatkan kualitas warna serta rasa buah. Kalium juga memperkuat dinding sel tanaman.',
-            tips: 'Berikan pupuk KCl atau abu kayu secara teratur, terutama saat fase pembentukan dan pematangan buah.',
+            desc: 'Potassium (K) increases chilli resistance to disease attacks, drought, and improves the color quality and taste of the fruit. Potassium also strengthens plant cell walls.',
+            tips: 'Apply KCl fertilizer or wood ash regularly, especially during the fruit formation and ripening phases.',
         },
         ph: {
             ideal: '5.5 - 6.5',
-            desc: 'pH tanah sangat memengaruhi ketersediaan semua unsur hara. Cabai tumbuh optimal pada pH agak asam hingga netral (6.0–6.8). Di luar rentang ini, beberapa nutrisi menjadi tidak tersedia meski sudah dipupuk.',
-            tips: 'Lakukan uji pH tanah sebelum tanam. Sesuaikan dengan kapur dolomit (jika terlalu asam) atau belerang/sulfur (jika terlalu basa).',
+            desc: 'Soil pH greatly affects the availability of all nutrients. Chilli grows optimally at a slightly acidic to neutral pH (6.0-6.8). Outside this range, some nutrients become unavailable even if fertilized.',
+            tips: 'Perform a soil pH test before planting. Adjust with dolomite lime (if too acidic) or sulfur (if too alkaline).',
         },
         ph_kurang: {
-            ideal: 'pH < 6.0 (Terlalu Asam)',
-            desc: 'Ketika pH tanah di bawah 6.0, cabai mengalami keracunan aluminium dan mangan, serta kekurangan kalsium dan magnesium. Daun tampak klorosis (menguning), tepi daun mengering, dan pertumbuhan akar sangat terhambat.',
-            tips: 'Tambahkan kapur dolomit (CaMg(CO₃)₂) sebanyak 1–2 ton/ha dan campurkan hingga kedalaman 20 cm. Biarkan 2–4 minggu sebelum tanam agar pH stabil. Lakukan pengukuran ulang sebelum menanam.',
+            ideal: 'pH < 6.0 (Too Acidic)',
+            desc: 'When soil pH is below 6.0, chilli experiences aluminum and manganese toxicity, as well as calcium and magnesium deficiency. Leaves appear chlorotic (yellowing), leaf edges dry out, and root growth is severely stunted.',
+            tips: 'Add dolomite lime (CaMg(CO₃)₂) at 1-2 tons/ha and mix to a depth of 20 cm. Leave for 2-4 weeks before planting so the pH stabilizes. Re-measure before planting.',
         },
         ph_lebih: {
-            ideal: 'pH > 6.8 (Terlalu Basa)',
-            desc: 'Pada pH di atas 6.8, unsur mikro seperti besi (Fe), mangan (Mn), dan seng (Zn) mengendap sehingga tidak dapat diserap cabai. Gejala yang muncul adalah daun muda menguning dengan tulang daun tetap hijau (klorosis interveinal).',
-            tips: 'Turunkan pH dengan menambahkan belerang elemental (S) atau pupuk amonium sulfat. Pemberian kompos atau bahan organik secara rutin juga membantu menstabilkan pH secara alami dalam jangka panjang.',
+            ideal: 'pH > 6.8 (Too Alkaline)',
+            desc: 'At a pH above 6.8, micro nutrients like iron (Fe), manganese (Mn), and zinc (Zn) precipitate so they cannot be absorbed by chilli. Symptoms that appear are yellowing of young leaves with veins remaining green (interveinal chlorosis).',
+            tips: 'Lower the pH by adding elemental sulfur (S) or ammonium sulfate fertilizer. Applying compost or organic matter regularly also helps stabilize the pH naturally over the long term.',
         },
         unsur_hara: {
-            ideal: 'Unsur Mikro & Makro Seimbang',
-            desc: 'Selain N, P, K, cabai juga membutuhkan kalsium (Ca) untuk mencegah blossom-end rot, magnesium (Mg) untuk pembentukan klorofil, sulfur (S) untuk sintesis protein, serta unsur mikro seperti besi (Fe), seng (Zn), dan boron (B) untuk pembentukan bunga dan buah.',
-            tips: 'Semprotkan pupuk daun mengandung Ca, Mg, dan Zn setiap 2 minggu. Gunakan pupuk NPK lengkap yang sudah mengandung unsur mikro, atau tambahkan pupuk mikro secara terpisah jika gejala kekurangan terlihat.',
+            ideal: 'Balanced Micro & Macro Nutrients',
+            desc: 'Besides N, P, and K, chilli also needs calcium (Ca) to prevent blossom-end rot, magnesium (Mg) for chlorophyll formation, sulfur (S) for protein synthesis, and micro nutrients like iron (Fe), zinc (Zn), and boron (B) for flower and fruit formation.',
+            tips: 'Spray foliar fertilizer containing Ca, Mg, and Zn every 2 weeks. Use a complete NPK fertilizer that already contains micro nutrients, or add micro fertilizer separately if deficiency symptoms are visible.',
         },
 
         link: 'https://drive.google.com/file/d/1OjtpGt1P2U3Fhd5szKtOj1xcfbJZ4apY/view?usp=drive_link'

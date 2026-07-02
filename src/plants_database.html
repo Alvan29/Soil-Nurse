@@ -77,11 +77,7 @@
                         </p>
                     </div>
                     <div class="hidden size-20 items-center justify-center rounded-full border-[6px] border-white bg-[#f9f5ec] shadow-panel sm:flex">
-                        <svg viewBox="0 0 100 100" class="size-14" aria-hidden="true">
-                            <path d="M22 68c22-3 34-16 39-39 18 15 17 45-7 55-12 5-24 0-32-16Z" fill="#6f9462"/>
-                            <path d="M56 29c11 4 20 13 24 25" fill="none" stroke="#24415f" stroke-width="6" stroke-linecap="round"/>
-                            <circle cx="68" cy="30" r="8" fill="#c96f4c"/>
-                        </svg>
+                        <img src="images/makrut lime leaves.png" alt="" class="size-14 object-contain rounded-full">
                     </div>
                 </div>
             </div>
@@ -118,10 +114,10 @@
             <a href="about.html" class="flex h-full flex-1 items-center justify-center" aria-label="Tentang Soil Nurse">
                 <i data-lucide="clipboard-list" class="size-8 stroke-[1.8]"></i>
             </a>
-            <a href="../index.html#scanner" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
+            <a href="../index.html" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
                 <i data-lucide="search" class="size-9 stroke-[1.8]"></i>
             </a>
-            <a href="../index.html#scanner" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
+            <a href="../index.html" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
                 <div class="absolute -top-5 flex size-[4.5rem] items-center justify-center rounded-full bg-ocean">
                     <i data-lucide="scan-line" class="size-11 stroke-[1.7]"></i>
                 </div>
@@ -130,7 +126,7 @@
             <a href="plants_database.html" class="flex h-full flex-1 items-center justify-center text-ink" aria-label="Database tanaman">
                 <i data-lucide="sprout" class="size-8 stroke-[2.2]"></i>
             </a>
-            <a href="../index.html#home" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
+            <a href="../index.html" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
                 <i data-lucide="user-round" class="size-9 stroke-[1.8]"></i>
             </a>
         </nav>
@@ -298,15 +294,13 @@
             detailCare: document.getElementById('detailCare')
         };
 
-        function plantIconSvg(type, color, accent) {
-            const icons = {
-                leaf: `<svg viewBox="0 0 100 100" class="size-14" aria-hidden="true"><path d="M22 68c22-3 34-16 39-39 18 15 17 45-7 55-12 5-24 0-32-16Z" fill="${color}"/><path d="M56 29c11 4 20 13 24 25" fill="none" stroke="#24415f" stroke-width="6" stroke-linecap="round"/><circle cx="68" cy="30" r="8" fill="${accent}"/></svg>`,
-                chilli: `<svg viewBox="0 0 100 100" class="size-14" aria-hidden="true"><path d="M51 10c10 10 10 23 1 33-7 8-22 10-34 8 10-4 16-13 19-25 2-8 6-14 14-16Z" fill="${color}"/><path d="M55 8c5 2 8 8 6 15" fill="none" stroke="${accent}" stroke-width="7" stroke-linecap="round"/><circle cx="72" cy="33" r="4" fill="#fff"/></svg>`,
-                tomato: `<svg viewBox="0 0 100 100" class="size-14" aria-hidden="true"><circle cx="50" cy="55" r="31" fill="${color}"/><path d="M50 20l6 15 15-7-9 14 16 3-17 5 9 14-15-8-5 16-5-16-15 8 9-14-17-5 16-3-9-14 15 7 6-15Z" fill="${accent}"/></svg>`,
-                corn: `<svg viewBox="0 0 100 100" class="size-14" aria-hidden="true"><path d="M49 15c18 15 19 45 0 69-18-24-17-54 0-69Z" fill="${color}"/><path d="M29 52c-5 18 2 30 19 35-8-18-8-29 0-46-8 1-15 5-19 11Z" fill="${accent}"/><path d="M69 52c5 18-2 30-19 35 8-18 8-29 0-46 8 1 15 5 19 11Z" fill="#7ca86c"/></svg>`
-            };
-
-            return icons[type] || icons.leaf;
+        function plantIconImg(plantId, alt = '') {
+            // Ganti path sesuai lokasi gambar Anda
+            const basePath = 'images/';
+            // Asumsikan ekstensi .png, Anda bisa ubah ke .jpg atau .webp
+            const ext = '.png';
+            const src = `${basePath}${plantId}${ext}`;
+            return `<img src="${src}" alt="${alt || plantId}" class="size-14 object-contain rounded-full">`;
         }
 
         function renderPlantCards() {
@@ -314,7 +308,7 @@
                 <button data-plant-id="${plant.id}" class="plant-card min-h-[14rem] rounded-2xl border border-coral/35 bg-white/55 p-4 text-left shadow-panel transition hover:-translate-y-1 hover:border-clay focus:outline-none focus:ring-2 focus:ring-clay/45">
                     <div class="mb-4 flex items-center justify-between gap-3">
                         <div class="flex size-16 items-center justify-center rounded-full border-[5px] border-white bg-[#f9f5ec] shadow-inner">
-                            ${plantIconSvg(plant.icon, plant.color, plant.accent)}
+                            ${plantIconImg(plant.id, plant.commonName)}
                         </div>
                         <span class="rounded-full bg-leaf/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-leaf">${plant.badge}</span>
                     </div>
@@ -344,7 +338,7 @@
 
         function showPlantDetail(plantId) {
             const plant = plants.find((item) => item.id === plantId) || plants[0];
-            els.detailIcon.innerHTML = plantIconSvg(plant.icon, plant.color, plant.accent);
+            els.detailIcon.innerHTML = plantIconImg(plant.id, plant.commonName);
             els.detailBadge.textContent = plant.badge;
             els.detailTitle.textContent = plant.title;
             els.detailSummary.textContent = plant.summary;
