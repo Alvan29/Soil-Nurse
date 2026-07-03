@@ -300,7 +300,7 @@
             // Asumsikan ekstensi .png, Anda bisa ubah ke .jpg atau .webp
             const ext = '.png';
             const src = `${basePath}${plantId}${ext}`;
-            return `<img src="${src}" alt="${alt || plantId}" class="size-14 object-contain rounded-full">`;
+            return `<img src="${src}" alt="${alt || plantId}" class="size-14 object-cover rounded-full">`;
         }
 
         function renderPlantCards() {
