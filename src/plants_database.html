@@ -295,12 +295,18 @@
         };
 
         function plantIconImg(plantId, alt = '') {
-            // Ganti path sesuai lokasi gambar Anda
             const basePath = 'images/';
-            // Asumsikan ekstensi .png, Anda bisa ubah ke .jpg atau .webp
-            const ext = '.png';
-            const src = `${basePath}${plantId}${ext}`;
-            return `<img src="${src}" alt="${alt || plantId}" class="size-14 object-cover rounded-full">`;
+            // Daftar ekstensi yang mungkin (prioritaskan .png)
+            const extensions = ['png', 'PNG'];
+            
+            // Buat src utama (png) dan fallback (PNG)
+            const primarySrc = `${basePath}${plantId}.png`;
+            const fallbackSrc = `${basePath}${plantId}.PNG`;
+            
+            return `<img src="${primarySrc}" 
+                        alt="${alt || plantId}" 
+                        class="size-14 object-cover rounded-full"
+                        onerror="this.onerror=null; this.src='${fallbackSrc}';">`;
         }
 
         function renderPlantCards() {
