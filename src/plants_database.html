@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants Database - Soil Nurse</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Trebuchet MS"', '"Segoe UI"', 'ui-sans-serif', 'system-ui'],
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        cream: '#f8eadf',
+                        peach: '#f8d8c3',
+                        clay: '#c96f4c',
+                        coral: '#ef8b76',
+                        mint: '#a8d8d6',
+                        leaf: '#6f9462',
+                        ocean: '#9ed2e7',
+                        ink: '#24415f',
+                        soil: '#74513f'
+                    },
+                    boxShadow: {
+                        soft: '0 20px 45px rgba(92, 64, 45, 0.14)',
+                        panel: '0 10px 24px rgba(198, 111, 76, 0.13)'
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { transform: 'translateY(14px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        }
+                    },
+                    animation: {
+                        fadeUp: 'fadeUp .55s ease-out both',
+                        float: 'float 4s ease-in-out infinite'
+                    }
+                }
+            }
+        };
+    </script>
+</head>
+<body class="min-h-screen bg-[#e8f1ec] text-ink antialiased">
+    <main class="relative mx-auto min-h-screen w-full max-w-[540px] overflow-hidden bg-cream pb-24 shadow-soft">
+        <header class="sticky top-0 z-40 flex h-[6.25rem] items-center justify-between border-b border-white/35 bg-peach px-5">
+            <a href="../index.html" class="flex items-center gap-3" aria-label="Soil Nurse beranda">
+                <img src="images/Logo.png" alt="Logo Soil Nurse" class="h-16 w-auto object-contain">
+                <img src="images/LogoText.png" alt="Soil Nurse" class="h-10 w-auto object-contain">
+            </a>
+            <button class="rounded-full p-2 text-soil transition hover:bg-white/35" aria-label="Buka menu">
+                <i data-lucide="menu" class="size-8 stroke-[2.2]"></i>
+            </button>
+        </header>
+
+        <section id="plantListView" class="relative px-5 pb-5 pt-7">
+            <div class="absolute -right-24 top-4 size-56 rounded-full bg-mint/45 blur-3xl"></div>
+            <div class="absolute -left-20 bottom-0 size-44 rounded-full bg-ocean/30 blur-3xl"></div>
+
+            <div class="relative z-10 animate-fadeUp">
+                <div class="mb-4 inline-flex items-center gap-2 rounded-full bg-white/45 px-3 py-2 text-xs font-bold uppercase tracking-[0.16em] text-leaf">
+                    <i data-lucide="sprout" class="size-4"></i>
+                    Plant database
+                </div>
+                <div class="grid grid-cols-[1fr_auto] items-end gap-3">
+                    <div>
+                        <h1 class="font-display text-4xl font-black italic leading-none text-clay">Plants Database</h1>
+                        <p class="mt-3 max-w-[19rem] text-sm leading-6 text-soil/78">
+                            Select a plant to view basic information, growing season, harvest, and care requirements.
+                        </p>
+                    </div>
+                    <div class="hidden size-20 items-center justify-center rounded-full border-[6px] border-white bg-[#f9f5ec] shadow-panel sm:flex">
+                        <img src="images/makrut lime leaves.png" alt="" class="size-14 object-contain rounded-full">
+                    </div>
+                </div>
+            </div>
+
+            <div id="plantGrid" class="relative z-10 mt-6 grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <section id="plantDetailView" class="hidden px-5 pb-5 pt-7">
+            <button id="backToPlantsBtn" class="mb-4 inline-flex items-center gap-2 rounded-full border border-coral/40 bg-white/50 px-4 py-2 text-xs font-bold text-clay transition hover:bg-coral/10">
+                <i data-lucide="arrow-left" class="size-4"></i>
+                Back
+            </button>
+
+            <div class="mb-5 rounded-[2rem] border border-coral/35 bg-white/40 p-4 shadow-panel">
+                <div class="flex items-start gap-4">
+                    <div id="detailIcon" class="flex size-20 shrink-0 items-center justify-center rounded-full border-[6px] border-white bg-[#f9f5ec] shadow-panel"></div>
+                    <div>
+                        <span id="detailBadge" class="rounded-full bg-leaf/10 px-3 py-1 text-xs font-bold text-leaf">Easy grow</span>
+                        <h1 id="detailTitle" class="mt-3 font-display text-4xl font-black italic leading-none text-clay">Orange Leaf Plant</h1>
+                        <p id="detailSummary" class="mt-3 text-sm leading-6 text-soil/78"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3 flex items-center justify-between gap-3">
+                <h2 class="font-display text-2xl font-black italic text-clay">Basic Plant Information</h2>
+            </div>
+
+            <div id="detailFacts" class="space-y-3 rounded-[2rem] border border-coral/35 bg-white/40 p-3 shadow-panel"></div>
+            <div id="detailCare" class="mt-5 grid grid-cols-2 gap-3"></div>
+        </section>
+
+        <nav class="fixed bottom-0 left-1/2 z-50 flex h-16 w-full max-w-[540px] -translate-x-1/2 items-center justify-around bg-ocean text-white">
+            <a href="about.html" class="flex h-full flex-1 items-center justify-center" aria-label="Tentang Soil Nurse">
+                <i data-lucide="clipboard-list" class="size-8 stroke-[1.8]"></i>
+            </a>
+            <a href="../index.html" class="flex h-full flex-1 items-center justify-center" aria-label="Cari">
+                <i data-lucide="search" class="size-9 stroke-[1.8]"></i>
+            </a>
+            <a href="../index.html" class="relative flex h-full flex-1 items-center justify-center" aria-label="Scan">
+                <div class="absolute -top-5 flex size-[4.5rem] items-center justify-center rounded-full bg-ocean">
+                    <i data-lucide="scan-line" class="size-11 stroke-[1.7]"></i>
+                </div>
+                <span class="absolute bottom-0.5 text-xl font-bold italic leading-none">Scan</span>
+            </a>
+            <a href="plants_database.html" class="flex h-full flex-1 items-center justify-center text-ink" aria-label="Database tanaman">
+                <i data-lucide="sprout" class="size-8 stroke-[2.2]"></i>
+            </a>
+            <a href="../index.html" class="flex h-full flex-1 items-center justify-center" aria-label="Akun">
+                <i data-lucide="user-round" class="size-9 stroke-[1.8]"></i>
+            </a>
+        </nav>
+    </main>
+
+    <script>
+        const plants = [
+            {
+                id: 'makrut lime leaves',
+                title: 'Makrut Lime Leaves',
+                commonName: 'Makrut Lime Leaves',
+                latinName: 'Citrus hystrix',
+                badge: 'Easy grow',
+                color: '#6f9462',
+                accent: '#c96f4c',
+                summary: 'Tropical citrus leaves with a strong aroma, suitable for warm climates and regular daily care.',
+                lifeCycle: 'Annual',
+                harvestFirst: '10-12 months',
+                harvestNext: '3-6 months',
+                harvestNote: 'Regular pruning of the top helps stimulate new shoot growth.',
+                season: 'Warm climate. Early to mid-rainy season. Requires adequate moisture and optimal sunlight.',
+                temperature: '20-38\u00b0C',
+                origin: 'Tropical regions of Asia that prefer a warm climate.',
+                planting: 'Grows 2-12 meters',
+                potted: 'Grows 3-6 meters',
+                difficulty: 'Low to moderate. Easy to grow',
+                careNote: 'Requires attention to daily care. Needs optimal sunlight and regular watering but must not be overwatered.',
+                sunlight: 'Optimal sunlight',
+                watering: 'Regular, not excessive',
+                icon: 'leaf'
+            },
+            {
+                id: 'chilli',
+                title: 'Chilli Plant',
+                commonName: 'Chilli',
+                latinName: 'Capsicum frutescens L.',
+                badge: 'Warm soil',
+                color: '#dd1f2f',
+                accent: '#6f9462',
+                summary: 'A spicy fruit plant that thrives in fertile soil, full sun, and consistent moisture.',
+                lifeCycle: 'Annual',
+                harvestFirst: '2-3 months',
+                harvestNext: '1-2 weeks',
+                harvestNote: 'Pick mature fruit regularly to encourage new flowering and fruiting.',
+                season: 'Warm season. Best planted after heavy rain has settled and sunlight is consistent.',
+                temperature: '21-32\u00b0C',
+                origin: 'Tropical and subtropical regions of the Americas.',
+                planting: 'Grows 0.5-1.5 meters',
+                potted: 'Grows 0.4-1 meter',
+                difficulty: 'Moderate. Needs consistent care',
+                careNote: 'Keep soil moist but not soggy, add compost, and provide airflow to reduce disease.',
+                sunlight: 'Full sun',
+                watering: 'Moderate, consistent',
+                icon: 'chilli'
+            },
+            {
+                id: 'tomato',
+                title: 'Tomato Plant',
+                commonName: 'Tomato',
+                latinName: 'Solanum lycopersicum L.',
+                badge: 'Balanced nutrients',
+                color: '#e04435',
+                accent: '#4b9d44',
+                summary: 'Fruit and vegetable crops that thrive in loose soil with balanced nutrients and a pH close to neutral.',
+                lifeCycle: 'Annual',
+                harvestFirst: '2-4 months',
+                harvestNext: '1-2 weeks',
+                harvestNote: 'Harvest when fruit is fully colored, and support stems with stakes or cages.',
+                season: 'Warm and bright season with steady watering. Avoid long periods of wet leaves.',
+                temperature: '18-27\u00b0C',
+                origin: 'Western South America and Central America.',
+                planting: 'Grows 1-3 meters',
+                potted: 'Grows 0.6-1.5 meters',
+                difficulty: 'Moderate. Needs support',
+                careNote: 'Use stakes early, prune lower leaves, and water at soil level to prevent leaf disease.',
+                sunlight: 'Full sun',
+                watering: 'Regular, deep watering',
+                icon: 'tomato'
+            },
+            {
+                id: 'turmeric',
+                title: 'Turmeric Plant',
+                commonName: 'Turmeric',
+                latinName: 'Curcuma longa L.',
+                badge: 'High in minerals',
+                color: '#f0b52d',
+                accent: '#6f9462',
+                summary: 'The rhizome is rich in curcumin and minerals and is consumed in small amounts as a spice or an anti-inflammatory supplement.',
+                lifeCycle: 'Perennial',
+                harvestFirst: '7-12 months',
+                harvestNext: '12-18 months',
+                harvestNote: 'Harvest when kernels are full and silks start turning brown.',
+                season: 'Warm season with full sun. Plant in groups to support pollination.',
+                temperature: '18-35\u00b0C',
+                origin: 'Central America.',
+                planting: 'Grows 1.5-3 meters',
+                potted: 'Not ideal, needs deep container',
+                difficulty: 'Low to moderate',
+                careNote: 'Water well during flowering, add nitrogen gradually, and keep weeds controlled.',
+                sunlight: 'Partial Shade',
+                watering: 'Regular, Deep Watering',
+                icon: 'turmeric'
+            },
+			{
+                id: 'basil',
+                title: 'Basil Plant',
+                commonName: 'Basil',
+                latinName: 'Ocimum basilicum',
+                badge: 'Rich in Antioxidants',
+                color: '#f0b52d',
+                accent: '#6f9462',
+                summary: 'Basil is an herb rich in antioxidants and bioactive compounds, used as an aromatic seasoning in cooking.',
+                lifeCycle: 'Annual',
+                harvestFirst: '25-30 days',
+                harvestNext: 'every 2-3 weeks',
+                harvestNote: 'When harvesting, be sure to leave at least 2–3 pairs of leaves near the roots so the plant remains strong enough to grow again.',
+                season: 'Dry Season. Grows very well and quickly because it receives full sunlight all day along',
+                temperature: '18-27\u00b0C',
+                origin: 'Tropical region of Asia and Africa.',
+                planting: 'Grows 60-100 cm',
+                potted: 'Not ideal, needs deep container',
+                difficulty: 'Low to Easy',
+                careNote: 'Basil needs full sun, moist but not soggy soil, warm temperatures, and regular pruning to thrive.',
+                sunlight: 'Full sun',
+                watering: 'Regular, Consistent watering',
+                icon: 'basil'
+            },
+			{
+                id: 'onion leaves',
+                title: 'Onion Leaves',
+                commonName: 'Onion Leaves',
+                latinName: 'Allium fistulosum L.',
+                badge: 'High in Antioxidants',
+                color: '#f0b52d',
+                accent: '#6f9462',
+                summary: 'Onion Leaves are rich in antioxidants (especially quercetin), vitamin C, and β-carotene, and are used as an aromatic seasoning or as a fresh side dish.',
+                lifeCycle: 'Perennial',
+                harvestFirst: '2-3 months',
+                harvestNext: '1-2 weeks',
+                harvestNote: 'Regularly trimming the upper parts of the leaves encourages the plant to produce new shoots.',
+                season: 'Rainy to Dry Season. Thrives in moist soil and partial sun to full sun, suitable for both rainy and dry seasons with good drainage.',
+                temperature: '18-27\u00b0C',
+                origin: 'Northwestern China, Asian Region.',
+                planting: 'Grows 20-25 cm',
+                potted: 'Not ideal, needs deep container',
+                difficulty: 'Low to medium',
+                careNote: 'Requires attention to daily care. Needs optimal sunlight and regular watering but must not be overwatered.',
+                sunlight: 'Partial Shade',
+                watering: 'Regular, Consistent watering',
+                icon: 'onion leaves'
+            },
+	        
+        ];
+
+        const els = {
+            listView: document.getElementById('plantListView'),
+            detailView: document.getElementById('plantDetailView'),
+            plantGrid: document.getElementById('plantGrid'),
+            backButton: document.getElementById('backToPlantsBtn'),
+            detailIcon: document.getElementById('detailIcon'),
+            detailBadge: document.getElementById('detailBadge'),
+            detailTitle: document.getElementById('detailTitle'),
+            detailSummary: document.getElementById('detailSummary'),
+            detailFacts: document.getElementById('detailFacts'),
+            detailCare: document.getElementById('detailCare')
+        };
+
+        function plantIconImg(plantId, alt = '') {
+            // Ganti path sesuai lokasi gambar Anda
+            const basePath = 'images/';
+            // Asumsikan ekstensi .png, Anda bisa ubah ke .jpg atau .webp
+            const ext = '.png';
+            const src = `${basePath}${plantId}${ext}`;
+            return `<img src="${src}" alt="${alt || plantId}" class="size-14 object-cover rounded-full">`;
+        }
+
+        function renderPlantCards() {
+            els.plantGrid.innerHTML = plants.map((plant) => `
+                <button data-plant-id="${plant.id}" class="plant-card min-h-[14rem] rounded-2xl border border-coral/35 bg-white/55 p-4 text-left shadow-panel transition hover:-translate-y-1 hover:border-clay focus:outline-none focus:ring-2 focus:ring-clay/45">
+                    <div class="mb-4 flex items-center justify-between gap-3">
+                        <div class="flex size-16 items-center justify-center rounded-full border-[5px] border-white bg-[#f9f5ec] shadow-inner">
+                            ${plantIconImg(plant.id, plant.commonName)}
+                        </div>
+                        <span class="rounded-full bg-leaf/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.12em] text-leaf">${plant.badge}</span>
+                    </div>
+                    <p class="font-display text-2xl font-black italic leading-none text-clay">${plant.commonName}</p>
+                    <p class="mt-1 text-xs font-bold italic text-soil/70">${plant.latinName}</p>
+                    <p class="mt-3 line-clamp-3 text-xs leading-5 text-soil/78">${plant.summary}</p>
+                    <div class="mt-4 flex items-center justify-between border-t border-coral/20 pt-3 text-xs font-bold text-ink">
+                        <span>${plant.temperature}</span>
+                        <span class="inline-flex items-center gap-1 text-clay">Detail <i data-lucide="chevron-right" class="size-4"></i></span>
+                    </div>
+                </button>
+            `).join('');
+
+            document.querySelectorAll('.plant-card').forEach((card) => {
+                card.addEventListener('click', () => showPlantDetail(card.dataset.plantId));
+            });
+        }
+
+        function infoBlock(title, body) {
+            return `
+                <article class="overflow-hidden rounded-2xl border border-coral/30 bg-white/60">
+                    <h3 class="bg-peach/80 px-4 py-3 text-center text-sm font-black uppercase tracking-[0.14em] text-ink">${title}</h3>
+                    ${body}
+                </article>
+            `;
+        }
+
+        function showPlantDetail(plantId) {
+            const plant = plants.find((item) => item.id === plantId) || plants[0];
+            els.detailIcon.innerHTML = plantIconImg(plant.id, plant.commonName);
+            els.detailBadge.textContent = plant.badge;
+            els.detailTitle.textContent = plant.title;
+            els.detailSummary.textContent = plant.summary;
+            els.detailFacts.innerHTML = `
+                ${infoBlock('Plant Name', `
+                    <div class="grid grid-cols-2 divide-x divide-coral/25">
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Common Name</p>
+                            <p class="mt-2 text-base font-bold text-soil">${plant.commonName}</p>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Latin Name</p>
+                            <p class="mt-2 text-base font-bold italic text-soil">${plant.latinName}</p>
+                        </div>
+                    </div>
+                `)}
+                ${infoBlock('Life Cycle', `<p class="p-4 text-base font-bold text-soil">${plant.lifeCycle}</p>`)}
+                ${infoBlock('Harvest', `
+                    <div class="grid grid-cols-2 divide-x divide-coral/25 border-b border-coral/25">
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">First Cycle</p>
+                            <p class="mt-2 font-semibold text-soil">${plant.harvestFirst}</p>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Subsequent Cycle</p>
+                            <p class="mt-2 font-semibold text-soil">${plant.harvestNext}</p>
+                        </div>
+                    </div>
+                    <p class="p-4 text-sm leading-6 text-soil/80">${plant.harvestNote}</p>
+                `)}
+                ${infoBlock('Growing Season', `
+                    <p class="border-b border-coral/25 p-4 text-sm leading-6 text-soil/80">${plant.season}</p>
+                    <div class="p-4">
+                        <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Temperature</p>
+                        <p class="mt-2 font-semibold text-soil">${plant.temperature}</p>
+                    </div>
+                `)}
+                ${infoBlock('Plant Origin', `
+                    <p class="border-b border-coral/25 p-4 text-sm leading-6 text-soil/80">${plant.origin}</p>
+                    <div class="grid grid-cols-2 divide-x divide-coral/25">
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Planting</p>
+                            <p class="mt-2 font-semibold text-soil">${plant.planting}</p>
+                        </div>
+                        <div class="p-4">
+                            <p class="text-xs font-bold uppercase tracking-[0.12em] text-clay">Potted Plant</p>
+                            <p class="mt-2 font-semibold text-soil">${plant.potted}</p>
+                        </div>
+                    </div>
+                `)}
+                ${infoBlock('Difficulty Level', `
+                    <p class="border-b border-coral/25 p-4 text-base font-bold text-soil">${plant.difficulty}</p>
+                    <p class="p-4 text-sm leading-6 text-soil/80">${plant.careNote}</p>
+                `)}
+            `;
+            els.detailCare.innerHTML = `
+                <div class="rounded-2xl border border-coral/35 bg-white/42 p-4 shadow-panel">
+                    <div class="mb-3 flex size-10 items-center justify-center rounded-full bg-leaf/15 text-leaf">
+                        <i data-lucide="sun" class="size-5"></i>
+                    </div>
+                    <p class="text-xs font-bold uppercase tracking-[0.14em] text-clay">Sunlight</p>
+                    <p class="mt-1 text-sm font-semibold text-soil">${plant.sunlight}</p>
+                </div>
+                <div class="rounded-2xl border border-coral/35 bg-white/42 p-4 shadow-panel">
+                    <div class="mb-3 flex size-10 items-center justify-center rounded-full bg-ocean/30 text-ink">
+                        <i data-lucide="droplets" class="size-5"></i>
+                    </div>
+                    <p class="text-xs font-bold uppercase tracking-[0.14em] text-clay">Watering</p>
+                    <p class="mt-1 text-sm font-semibold text-soil">${plant.watering}</p>
+                </div>
+            `;
+            els.listView.classList.add('hidden');
+            els.detailView.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            lucide.createIcons();
+        }
+
+        els.backButton.addEventListener('click', () => {
+            els.detailView.classList.add('hidden');
+            els.listView.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        renderPlantCards();
+        lucide.createIcons();
+    </script>
+</body>
+</html>
